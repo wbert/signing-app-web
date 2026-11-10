@@ -43,9 +43,14 @@ export function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     {
-      // Static assets carry no markup and need no policy; prefetches are
-      // skipped so a navigation does not pay for a nonce twice.
-      source: "/((?!_next/static|_next/image|favicon.ico).*)",
+      // Only HTML documents need this policy. The backend prefixes are
+      // rewritten straight through to the API and return JSON, so matching
+      // them would add a middleware invocation — billable and latency-adding
+      // on Vercel — to every API call for a header no browser applies to a
+      // fetch response. Static assets carry no markup, and prefetches are
+      // skipped so a navigation does not mint a nonce twice.
+      source:
+        "/((?!api/|audit-events|health|_next/static|_next/image|favicon.ico).*)",
       missing: [
         { type: "header", key: "next-router-prefetch" },
         { type: "header", key: "purpose", value: "prefetch" },

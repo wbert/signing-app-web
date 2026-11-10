@@ -483,7 +483,7 @@ export function DocumentTypeFormDialog({
               {signingModes.map((mode) => (
                 <label
                   className={cn(
-                    "flex cursor-pointer gap-3 rounded-xl border p-3 transition",
+                    "flex cursor-pointer gap-3 rounded-none border p-3 transition",
                     form.signingMode === mode
                       ? "border-emerald-700/35 bg-emerald-50/70 dark:bg-emerald-950/35"
                       : "hover:bg-muted/50"
@@ -658,7 +658,7 @@ export function DocumentTypeFormDialog({
             <ul className="flex flex-wrap gap-1.5">
               {attachmentKeys.map((key) => (
                 <li
-                  className="rounded-full border bg-muted/40 px-2.5 py-1 font-mono text-[0.62rem] font-bold tracking-wide"
+                  className="rounded-none border bg-muted/40 px-2.5 py-1 font-mono text-[0.62rem] font-bold tracking-wide"
                   key={key}
                 >
                   {key}
@@ -670,7 +670,7 @@ export function DocumentTypeFormDialog({
 
         <div className="flex flex-col-reverse gap-2 pt-2 sm:flex-row sm:justify-end">
           <Button
-            className="rounded-xl"
+            className="rounded-none"
             disabled={busy}
             onClick={onClose}
             type="button"
@@ -678,7 +678,7 @@ export function DocumentTypeFormDialog({
           >
             Cancel
           </Button>
-          <Button className="rounded-xl" disabled={busy} type="submit">
+          <Button className="rounded-none" disabled={busy} type="submit">
             {busy ? (
               <LoaderCircle className="animate-spin" />
             ) : editing ? (
@@ -761,7 +761,7 @@ function ToggleRow({
 }) {
   return (
     <label
-      className="flex w-full cursor-pointer gap-3 rounded-xl border p-3 transition hover:bg-muted/50"
+      className="flex w-full cursor-pointer gap-3 rounded-none border p-3 transition hover:bg-muted/50"
       htmlFor={id}
     >
       <input

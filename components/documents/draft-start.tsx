@@ -309,7 +309,7 @@ export function DraftStart() {
             <span
               aria-current={index === step ? "step" : undefined}
               className={cn(
-                "inline-flex items-center gap-2 rounded-xl border px-3 py-1.5 text-xs font-semibold",
+                "inline-flex items-center gap-2 rounded-none border px-3 py-1.5 text-xs font-semibold",
                 index === step
                   ? "border-emerald-700/35 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/45 dark:text-emerald-200"
                   : index < step
@@ -332,7 +332,7 @@ export function DraftStart() {
         )}
       </div>
 
-      <section className="mt-6 rounded-3xl border bg-card p-5 shadow-sm sm:p-6">
+      <section className="mt-6 rounded-none border bg-card p-5 shadow-sm sm:p-6">
         {step === 0 && (
           <div className="space-y-5">
             <fieldset>
@@ -342,7 +342,7 @@ export function DraftStart() {
                 and approval path this document will follow.
               </p>
               {usableTypes.length === 0 ? (
-                <p className="mt-3 rounded-xl border border-amber-300/70 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
+                <p className="mt-3 rounded-none border border-amber-300/70 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
                   No document type is ready for drafts. An administrator must
                   publish a PDF template for at least one active type first.
                 </p>
@@ -351,7 +351,7 @@ export function DraftStart() {
                   {usableTypes.map((entry) => (
                     <label
                       className={cn(
-                        "flex cursor-pointer gap-3 rounded-xl border p-3 transition focus-within:ring-2 focus-within:ring-ring/30",
+                        "flex cursor-pointer gap-3 rounded-none border p-3 transition focus-within:ring-2 focus-within:ring-ring/30",
                         documentTypeId === entry.id
                           ? "border-emerald-700/35 bg-emerald-50/70 dark:bg-emerald-950/35"
                           : "hover:bg-muted/50"
@@ -392,7 +392,7 @@ export function DraftStart() {
               )}
 
               {blockedTypes.length > 0 && (
-                <details className="mt-3 rounded-xl border bg-muted/25 p-3">
+                <details className="mt-3 rounded-none border bg-muted/25 p-3">
                   <summary className="cursor-pointer text-xs font-semibold">
                     {blockedTypes.length} type
                     {blockedTypes.length === 1 ? "" : "s"} cannot be used yet
@@ -448,7 +448,7 @@ export function DraftStart() {
                   fileError ? "draft-file-error" : "draft-file-description"
                 }
                 aria-invalid={fileError ? true : undefined}
-                className="field-input h-auto cursor-pointer py-3 file:mr-3 file:rounded-lg file:border-0 file:bg-muted file:px-3 file:py-1.5 file:text-xs file:font-semibold"
+                className="field-input h-auto cursor-pointer py-3 file:mr-3 file:rounded-none file:border-0 file:bg-muted file:px-3 file:py-1.5 file:text-xs file:font-semibold"
                 disabled={!selectedType}
                 id="draft-file"
                 onChange={(event) =>
@@ -481,7 +481,7 @@ export function DraftStart() {
                   </p>
                 )}
                 {file && geometry && !inspecting && (
-                  <p className="flex items-center gap-2 rounded-xl border bg-background px-3 py-2.5 text-sm">
+                  <p className="flex items-center gap-2 rounded-none border bg-background px-3 py-2.5 text-sm">
                     <FileText className="size-4 shrink-0 text-muted-foreground" />
                     <span className="min-w-0 flex-1 truncate">{file.name}</span>
                     <span className="shrink-0 text-xs text-muted-foreground">
@@ -531,7 +531,7 @@ export function DraftStart() {
 
         {problems.length > 0 && step !== 2 && (
           <div
-            className="mt-5 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-950 dark:border-red-950 dark:bg-red-950/35 dark:text-red-100"
+            className="mt-5 rounded-none border border-red-200 bg-red-50 p-4 text-sm text-red-950 dark:border-red-950 dark:bg-red-950/35 dark:text-red-100"
             role="alert"
           >
             <p className="font-semibold">Before continuing:</p>
@@ -547,7 +547,7 @@ export function DraftStart() {
 
         <div className="mt-6 flex flex-col-reverse gap-2 border-t pt-5 sm:flex-row sm:justify-between">
           <Button
-            className="rounded-xl"
+            className="rounded-none"
             disabled={step === 0 || creating}
             onClick={() => {
               setProblems([])
@@ -560,13 +560,13 @@ export function DraftStart() {
             Back
           </Button>
           {step < 3 ? (
-            <Button className="rounded-xl" onClick={goNext} type="button">
+            <Button className="rounded-none" onClick={goNext} type="button">
               Continue
               <ArrowRight />
             </Button>
           ) : (
             <Button
-              className="rounded-xl"
+              className="rounded-none"
               disabled={creating}
               onClick={() => void create()}
               type="button"
@@ -618,7 +618,7 @@ function ReviewSummary({
         />
       </dl>
 
-      <div className="rounded-2xl border bg-muted/25 p-4">
+      <div className="rounded-none border bg-muted/25 p-4">
         <h3 className="text-sm font-semibold">Signing order</h3>
         <ol className="mt-2 space-y-1 text-sm">
           {signatories.map((signatory, index) => (
@@ -637,7 +637,7 @@ function ReviewSummary({
       </div>
 
       {documentType.requiredAttachmentKeys.length > 0 && (
-        <p className="rounded-xl border border-amber-300/70 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
+        <p className="rounded-none border border-amber-300/70 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
           This type requires {documentType.requiredAttachmentKeys.length}{" "}
           attachment
           {documentType.requiredAttachmentKeys.length === 1 ? "" : "s"}. You can
@@ -646,7 +646,7 @@ function ReviewSummary({
       )}
 
       {!documentType.isUsableForSubmission && (
-        <p className="rounded-xl border border-amber-300/70 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
+        <p className="rounded-none border border-amber-300/70 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
           This type is not ready for submission yet, so the draft can be saved
           but not sent for approval until an administrator finishes configuring
           it.

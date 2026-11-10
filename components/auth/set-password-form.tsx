@@ -135,7 +135,7 @@ export function SetPasswordForm() {
         icon={<CheckCircle2 className="size-6" />}
         title="Password created"
       >
-        <Button className="mt-6 rounded-xl" render={<Link href="/login" />}>
+        <Button className="mt-6 rounded-none" render={<Link href="/login" />}>
           Continue to sign in
           <ArrowRight />
         </Button>
@@ -146,7 +146,7 @@ export function SetPasswordForm() {
   return (
     <div className="w-full max-w-[29rem]">
       <div className="mb-8">
-        <div className="mb-5 flex size-12 items-center justify-center rounded-2xl border border-emerald-900/10 bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+        <div className="mb-5 flex size-12 items-center justify-center rounded-none border border-emerald-900/10 bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
           <KeyRound className="size-5" />
         </div>
         <p className="mb-2 text-xs font-bold tracking-[0.16em] text-emerald-700 uppercase dark:text-emerald-400">
@@ -163,7 +163,7 @@ export function SetPasswordForm() {
 
       {message && (
         <div
-          className="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-900 dark:border-red-950 dark:bg-red-950/40 dark:text-red-200"
+          className="mb-5 rounded-none border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-900 dark:border-red-950 dark:bg-red-950/40 dark:text-red-200"
           role="alert"
         >
           <p>{message}</p>
@@ -232,7 +232,7 @@ export function SetPasswordForm() {
         </div>
 
         <Button
-          className="w-full rounded-xl"
+          className="w-full rounded-none"
           disabled={busy}
           size="lg"
           type="submit"
@@ -258,7 +258,7 @@ function StatusCard({
 }) {
   return (
     <div className="max-w-md text-center">
-      <div className="mx-auto grid size-14 place-items-center rounded-2xl bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+      <div className="mx-auto grid size-14 place-items-center rounded-none bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
         {icon}
       </div>
       <h1 className="mt-5 font-heading text-3xl font-semibold tracking-tight">

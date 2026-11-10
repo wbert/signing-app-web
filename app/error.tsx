@@ -18,7 +18,7 @@ export default function ErrorPage({ retry }: { retry: () => void }) {
           No document or account details were changed. Try loading the page
           again.
         </p>
-        <Button className="mt-6 rounded-xl" onClick={retry}>
+        <Button className="mt-6 rounded-none" onClick={retry}>
           <RotateCcw />
           Try again
         </Button>

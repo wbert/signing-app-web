@@ -72,7 +72,7 @@ export function SignatoryEditor({
   return (
     <div className="space-y-3">
       {detailsUnavailable && signatories.length > 0 && (
-        <p className="flex gap-2.5 rounded-xl border bg-muted/30 p-3 text-xs leading-5 text-muted-foreground">
+        <p className="flex gap-2.5 rounded-none border bg-muted/30 p-3 text-xs leading-5 text-muted-foreground">
           <Info className="mt-0.5 size-4 shrink-0" />
           Candidate, worker, and representative details are recorded once per
           person, the first time that person is seen. They are shown here but
@@ -90,14 +90,14 @@ export function SignatoryEditor({
           )
           return (
             <li
-              className="rounded-2xl border bg-card p-4 shadow-xs"
+              className="rounded-none border bg-card p-4 shadow-xs"
               key={index}
             >
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <span
                     className={cn(
-                      "grid size-9 shrink-0 place-items-center rounded-xl border-2 text-sm font-bold",
+                      "grid size-9 shrink-0 place-items-center rounded-none border-2 text-sm font-bold",
                       paletteFor(index)
                     )}
                   >
@@ -115,7 +115,7 @@ export function SignatoryEditor({
                 <div className="flex gap-1.5">
                   <Button
                     aria-label={`Move signatory ${index + 1} earlier in the signing order`}
-                    className="rounded-xl"
+                    className="rounded-none"
                     disabled={index === 0}
                     onClick={() => move(index, -1)}
                     size="icon-sm"
@@ -126,7 +126,7 @@ export function SignatoryEditor({
                   </Button>
                   <Button
                     aria-label={`Move signatory ${index + 1} later in the signing order`}
-                    className="rounded-xl"
+                    className="rounded-none"
                     disabled={index === signatories.length - 1}
                     onClick={() => move(index, 1)}
                     size="icon-sm"
@@ -137,7 +137,7 @@ export function SignatoryEditor({
                   </Button>
                   <Button
                     aria-label={`Remove signatory ${index + 1}`}
-                    className="rounded-xl"
+                    className="rounded-none"
                     onClick={() =>
                       onChange(signatories.filter((_, at) => at !== index))
                     }
@@ -335,7 +335,7 @@ export function SignatoryEditor({
       </ol>
 
       <Button
-        className="rounded-xl"
+        className="rounded-none"
         disabled={signatories.length >= draftLimits.signatories.max}
         onClick={() =>
           onChange([

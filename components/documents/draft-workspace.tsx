@@ -443,7 +443,7 @@ export function DraftWorkspace({ documentId }: { documentId: string }) {
       actions={
         <div className="flex flex-wrap gap-2">
           <Button
-            className="rounded-xl"
+            className="rounded-none"
             disabled={previewing}
             onClick={() => void openPreview()}
             size="lg"
@@ -453,7 +453,7 @@ export function DraftWorkspace({ documentId }: { documentId: string }) {
             Preview PDF
           </Button>
           <Button
-            className="rounded-xl"
+            className="rounded-none"
             disabled={saving}
             onClick={() => void save()}
             size="lg"
@@ -509,7 +509,7 @@ export function DraftWorkspace({ documentId }: { documentId: string }) {
 
       {problems.length > 0 && (
         <div
-          className="mt-4 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-950 dark:border-red-950 dark:bg-red-950/35 dark:text-red-100"
+          className="mt-4 rounded-none border border-red-200 bg-red-50 p-4 text-sm text-red-950 dark:border-red-950 dark:bg-red-950/35 dark:text-red-100"
           role="alert"
         >
           <p className="font-semibold">Before saving:</p>
@@ -525,7 +525,7 @@ export function DraftWorkspace({ documentId }: { documentId: string }) {
 
       <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
         <div className="space-y-6">
-          <section className="rounded-3xl border bg-card p-5 shadow-sm sm:p-6">
+          <section className="rounded-none border bg-card p-5 shadow-sm sm:p-6">
             <h2 className="font-heading text-lg font-semibold">Document</h2>
             <div className="mt-4">
               <Field htmlFor="draft-title" label="Title">
@@ -540,7 +540,7 @@ export function DraftWorkspace({ documentId }: { documentId: string }) {
             </div>
           </section>
 
-          <section className="rounded-3xl border bg-card p-5 shadow-sm sm:p-6">
+          <section className="rounded-none border bg-card p-5 shadow-sm sm:p-6">
             <h2 className="font-heading text-lg font-semibold">Signatories</h2>
             <p className="mt-1 mb-4 text-sm leading-6 text-muted-foreground">
               Signing order follows this list. No account is created for a
@@ -558,7 +558,7 @@ export function DraftWorkspace({ documentId }: { documentId: string }) {
             />
           </section>
 
-          <section className="rounded-3xl border bg-card p-5 shadow-sm sm:p-6">
+          <section className="rounded-none border bg-card p-5 shadow-sm sm:p-6">
             <h2 className="font-heading text-lg font-semibold">
               Signing fields
             </h2>
@@ -567,7 +567,7 @@ export function DraftWorkspace({ documentId }: { documentId: string }) {
               PDF, so placement matches what will be stamped.
             </p>
             {pdfUnavailable && (
-              <p className="mb-4 rounded-xl border border-amber-300/70 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
+              <p className="mb-4 rounded-none border border-amber-300/70 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
                 {pdfUnavailable}
               </p>
             )}
@@ -621,7 +621,7 @@ function ApprovalPathPanel({ draft }: { draft: Draft }) {
   }
 
   return (
-    <section className="rounded-3xl border bg-card p-5 shadow-sm">
+    <section className="rounded-none border bg-card p-5 shadow-sm">
       <h2 className="flex items-center gap-2 font-heading text-lg font-semibold">
         <GitBranch className="size-4" />
         Approval path
@@ -636,7 +636,7 @@ function ApprovalPathPanel({ draft }: { draft: Draft }) {
           <ol className="mt-3 space-y-2 text-sm">
             {[...grouped.entries()].map(([stepNumber, entries]) => (
               <li className="flex gap-3" key={stepNumber}>
-                <span className="grid size-6 shrink-0 place-items-center rounded-lg bg-muted text-xs font-bold">
+                <span className="grid size-6 shrink-0 place-items-center rounded-none bg-muted text-xs font-bold">
                   {stepNumber}
                 </span>
                 <span>
@@ -734,7 +734,7 @@ function AttachmentsPanel({
   }
 
   return (
-    <section className="rounded-3xl border bg-card p-5 shadow-sm">
+    <section className="rounded-none border bg-card p-5 shadow-sm">
       <h2 className="flex items-center gap-2 font-heading text-lg font-semibold">
         <Paperclip className="size-4" />
         Attachments
@@ -760,12 +760,12 @@ function AttachmentsPanel({
             const attachment = present.get(key)
             const inputId = `attachment-${key}`
             return (
-              <li className="rounded-2xl border p-3" key={key}>
+              <li className="rounded-none border p-3" key={key}>
                 <div className="flex items-center justify-between gap-2">
                   <p className="font-mono text-xs font-bold">{key}</p>
                   <span
                     className={cn(
-                      "rounded-full border px-2 py-0.5 text-[0.6rem] font-bold tracking-wide uppercase",
+                      "rounded-none border px-2 py-0.5 text-[0.6rem] font-bold tracking-wide uppercase",
                       attachment
                         ? "border-emerald-200 bg-emerald-50 text-emerald-800 dark:border-emerald-950 dark:bg-emerald-950/40 dark:text-emerald-300"
                         : "border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-950 dark:bg-amber-950/40 dark:text-amber-300"
@@ -792,7 +792,7 @@ function AttachmentsPanel({
                     </label>
                     <input
                       accept="application/pdf,.pdf"
-                      className="field-input mt-2 h-auto cursor-pointer py-2 text-xs file:mr-2 file:rounded-lg file:border-0 file:bg-muted file:px-2 file:py-1 file:text-[0.65rem] file:font-semibold"
+                      className="field-input mt-2 h-auto cursor-pointer py-2 text-xs file:mr-2 file:rounded-none file:border-0 file:bg-muted file:px-2 file:py-1 file:text-[0.65rem] file:font-semibold"
                       disabled={uploading === key}
                       id={inputId}
                       onChange={(event) => {

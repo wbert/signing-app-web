@@ -138,7 +138,7 @@ export function TemplateUploadDialog({
 
       <section
         aria-labelledby="current-template-heading"
-        className="mt-5 rounded-2xl border bg-muted/25 p-4"
+        className="mt-5 rounded-none border bg-muted/25 p-4"
       >
         <h3 className="text-sm font-semibold" id="current-template-heading">
           Current template
@@ -184,7 +184,7 @@ export function TemplateUploadDialog({
               fileError ? "template-file-error" : "template-file-description"
             }
             aria-invalid={fileError ? true : undefined}
-            className="field-input h-auto cursor-pointer py-3 file:mr-3 file:rounded-lg file:border-0 file:bg-muted file:px-3 file:py-1.5 file:text-xs file:font-semibold"
+            className="field-input h-auto cursor-pointer py-3 file:mr-3 file:rounded-none file:border-0 file:bg-muted file:px-3 file:py-1.5 file:text-xs file:font-semibold"
             id="template-file"
             onChange={(event) =>
               void selectFile(event.target.files?.[0] ?? null)
@@ -219,7 +219,7 @@ export function TemplateUploadDialog({
             </p>
           )}
           {file && !checking && (
-            <p className="flex items-center gap-2 rounded-xl border bg-card px-3 py-2.5 text-sm">
+            <p className="flex items-center gap-2 rounded-none border bg-card px-3 py-2.5 text-sm">
               <FileText className="size-4 shrink-0 text-muted-foreground" />
               <span className="min-w-0 flex-1 truncate">{file.name}</span>
               <span className="shrink-0 text-xs text-muted-foreground">
@@ -229,7 +229,7 @@ export function TemplateUploadDialog({
           )}
         </div>
 
-        <p className="rounded-xl border border-amber-300/70 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
+        <p className="rounded-none border border-amber-300/70 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
           Publishing creates a new immutable version and makes it current for
           new drafts. Documents already created keep the template version they
           were prepared with.
@@ -237,7 +237,7 @@ export function TemplateUploadDialog({
 
         <div className="flex flex-col-reverse gap-2 pt-1 sm:flex-row sm:justify-end">
           <Button
-            className="rounded-xl"
+            className="rounded-none"
             disabled={busy}
             onClick={onClose}
             type="button"
@@ -246,7 +246,7 @@ export function TemplateUploadDialog({
             Cancel
           </Button>
           <Button
-            className="rounded-xl"
+            className="rounded-none"
             disabled={busy || checking || !file}
             type="submit"
           >

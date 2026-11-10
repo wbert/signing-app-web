@@ -30,7 +30,7 @@ export function SigningShell({
   stage?: SigningStage
 }) {
   return (
-    <div className="min-h-svh bg-[#f5f7f3] dark:bg-background">
+    <div className="min-h-svh bg-background dark:bg-background">
       <header className="border-b bg-background/95 backdrop-blur">
         <div className="mx-auto flex max-w-3xl flex-col gap-3 px-4 py-4 sm:px-6">
           <BrandLockup />
@@ -106,10 +106,10 @@ export function TerminalScreen({ state }: { state: TerminalState }) {
   const positive = state.reason === "completed"
   return (
     <SigningShell>
-      <div className="rounded-3xl border bg-card p-6 text-center shadow-sm sm:p-10">
+      <div className="rounded-none border bg-card p-6 text-center shadow-sm sm:p-10">
         <span
           className={cn(
-            "mx-auto grid size-12 place-items-center rounded-2xl",
+            "mx-auto grid size-12 place-items-center rounded-none",
             positive
               ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300"
               : "bg-muted text-muted-foreground"

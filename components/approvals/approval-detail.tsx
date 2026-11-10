@@ -252,7 +252,7 @@ export function ApprovalDetail({ approvalStepId }: { approvalStepId: string }) {
       </div>
 
       <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_23rem]">
-        <section className="rounded-3xl border bg-card p-5 shadow-sm sm:p-6">
+        <section className="rounded-none border bg-card p-5 shadow-sm sm:p-6">
           <h2 className="font-heading text-lg font-semibold">Document</h2>
           <p className="mt-1 mb-4 text-sm leading-6 text-muted-foreground">
             Review the document before deciding. Opening this page recorded that
@@ -267,7 +267,7 @@ export function ApprovalDetail({ approvalStepId }: { approvalStepId: string }) {
                 {view.preview.attachments.map((attachment) => (
                   <li key={attachment.requirementKey}>
                     <a
-                      className="flex items-center gap-2.5 rounded-xl border px-3 py-2.5 text-sm transition hover:bg-muted/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                      className="flex items-center gap-2.5 rounded-none border px-3 py-2.5 text-sm transition hover:bg-muted/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
                       href={attachment.url}
                       rel="noopener noreferrer"
                       target="_blank"
@@ -290,7 +290,7 @@ export function ApprovalDetail({ approvalStepId }: { approvalStepId: string }) {
         </section>
 
         <div className="space-y-6">
-          <section className="rounded-3xl border bg-card p-5 shadow-sm">
+          <section className="rounded-none border bg-card p-5 shadow-sm">
             <h2 className="font-heading text-lg font-semibold">Assignment</h2>
             <dl className="mt-3 space-y-2.5 text-sm">
               <Detail
@@ -325,7 +325,7 @@ export function ApprovalDetail({ approvalStepId }: { approvalStepId: string }) {
           </section>
 
           {canDecide && (
-            <section className="rounded-3xl border bg-card p-5 shadow-sm">
+            <section className="rounded-none border bg-card p-5 shadow-sm">
               <h2 className="font-heading text-lg font-semibold">Decision</h2>
               <p className="mt-1 text-sm leading-6 text-muted-foreground">
                 Your decision is recorded against the current version of this
@@ -335,7 +335,7 @@ export function ApprovalDetail({ approvalStepId }: { approvalStepId: string }) {
               {!returning ? (
                 <div className="mt-4 flex flex-col gap-2">
                   <Button
-                    className="rounded-xl"
+                    className="rounded-none"
                     disabled={busy !== null}
                     onClick={() => void decide("approve")}
                     type="button"
@@ -348,7 +348,7 @@ export function ApprovalDetail({ approvalStepId }: { approvalStepId: string }) {
                     {busy === "approve" ? "Recording…" : "Approve"}
                   </Button>
                   <Button
-                    className="rounded-xl"
+                    className="rounded-none"
                     disabled={busy !== null}
                     onClick={() => setReturning(true)}
                     type="button"
@@ -406,7 +406,7 @@ export function ApprovalDetail({ approvalStepId }: { approvalStepId: string }) {
 
                   <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
                     <Button
-                      className="rounded-xl"
+                      className="rounded-none"
                       disabled={busy !== null}
                       onClick={() => setReturning(false)}
                       type="button"
@@ -415,7 +415,7 @@ export function ApprovalDetail({ approvalStepId }: { approvalStepId: string }) {
                       Cancel
                     </Button>
                     <Button
-                      className="rounded-xl"
+                      className="rounded-none"
                       disabled={busy !== null || reason.trim().length === 0}
                       type="submit"
                       variant="destructive"
@@ -434,7 +434,7 @@ export function ApprovalDetail({ approvalStepId }: { approvalStepId: string }) {
           )}
 
           {!canDecide && decided === null && (
-            <section className="rounded-3xl border bg-muted/25 p-5">
+            <section className="rounded-none border bg-muted/25 p-5">
               <h2 className="flex items-center gap-2 font-heading text-lg font-semibold">
                 <Lock className="size-4" />
                 No decision available
@@ -446,7 +446,7 @@ export function ApprovalDetail({ approvalStepId }: { approvalStepId: string }) {
             </section>
           )}
 
-          <section className="rounded-3xl border bg-card p-5 shadow-sm">
+          <section className="rounded-none border bg-card p-5 shadow-sm">
             <h2 className="font-heading text-lg font-semibold">
               {decided ? "Resulting path" : "Approval path"}
             </h2>
@@ -473,14 +473,14 @@ export function ApprovalDetail({ approvalStepId }: { approvalStepId: string }) {
           </section>
 
           {decisionHistory(pathDocument).length > 0 && (
-            <section className="rounded-3xl border bg-card p-5 shadow-sm">
+            <section className="rounded-none border bg-card p-5 shadow-sm">
               <h2 className="font-heading text-lg font-semibold">
                 Decisions so far
               </h2>
               <ol className="mt-3 space-y-3">
                 {decisionHistory(pathDocument).map((entry) => (
                   <li
-                    className="rounded-2xl border p-3.5 text-sm"
+                    className="rounded-none border p-3.5 text-sm"
                     key={entry.id}
                   >
                     <p className="font-semibold">
@@ -489,7 +489,7 @@ export function ApprovalDetail({ approvalStepId }: { approvalStepId: string }) {
                       {roleLabel(entry.approverRole)}
                     </p>
                     {entry.returnReason && (
-                      <p className="mt-2 rounded-lg bg-muted/50 px-2.5 py-1.5 text-xs leading-5">
+                      <p className="mt-2 rounded-none bg-muted/50 px-2.5 py-1.5 text-xs leading-5">
                         {entry.returnReason}
                       </p>
                     )}

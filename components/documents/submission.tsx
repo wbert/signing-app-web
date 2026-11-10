@@ -73,7 +73,7 @@ export function SubmissionPanel({
   const allBlockers = [...clientBlockers, ...serverBlockers]
 
   return (
-    <section className="rounded-3xl border bg-card p-5 shadow-sm">
+    <section className="rounded-none border bg-card p-5 shadow-sm">
       <h2 className="flex items-center gap-2 font-heading text-lg font-semibold">
         <Send className="size-4" />
         Submit for approval
@@ -91,14 +91,14 @@ export function SubmissionPanel({
       )}
 
       {unsavedChanges && (
-        <p className="mt-4 rounded-xl border border-amber-300/70 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
+        <p className="mt-4 rounded-none border border-amber-300/70 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
           Save your changes before submitting. The API submits the version it
           already holds.
         </p>
       )}
 
       {allBlockers.length > 0 && (
-        <div className="mt-4 rounded-2xl border border-amber-300/70 bg-amber-50 p-3.5 dark:border-amber-900 dark:bg-amber-950/35">
+        <div className="mt-4 rounded-none border border-amber-300/70 bg-amber-50 p-3.5 dark:border-amber-900 dark:bg-amber-950/35">
           <p className="flex items-center gap-2 text-sm font-semibold text-amber-950 dark:text-amber-100">
             <CircleAlert className="size-4" />
             Not ready to submit
@@ -112,7 +112,7 @@ export function SubmissionPanel({
       )}
 
       <Button
-        className="mt-4 w-full rounded-xl"
+        className="mt-4 w-full rounded-none"
         disabled={busy || blocked}
         onClick={() => void submit()}
         type="button"
@@ -175,7 +175,7 @@ export function SenderApprovalView({
         )}
       </div>
 
-      <section className="rounded-3xl border bg-card p-5 shadow-sm sm:p-6">
+      <section className="rounded-none border bg-card p-5 shadow-sm sm:p-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h2 className="font-heading text-lg font-semibold">
@@ -187,7 +187,7 @@ export function SenderApprovalView({
           </div>
           <span
             className={cn(
-              "rounded-full border px-3 py-1 text-[0.64rem] font-bold tracking-wide uppercase",
+              "rounded-none border px-3 py-1 text-[0.64rem] font-bold tracking-wide uppercase",
               document.approvalStatus === "APPROVED"
                 ? "border-emerald-200 bg-emerald-50 text-emerald-800 dark:border-emerald-950 dark:bg-emerald-950/40 dark:text-emerald-300"
                 : document.approvalStatus === "RETURNED"
@@ -209,7 +209,7 @@ export function SenderApprovalView({
           <div className="mt-5 border-t pt-5">
             {!confirming ? (
               <Button
-                className="rounded-xl"
+                className="rounded-none"
                 onClick={() => setConfirming(true)}
                 type="button"
                 variant="destructive"
@@ -218,7 +218,7 @@ export function SenderApprovalView({
                 Recall from approval
               </Button>
             ) : (
-              <div className="rounded-2xl border border-red-200 bg-red-50 p-4 dark:border-red-950 dark:bg-red-950/30">
+              <div className="rounded-none border border-red-200 bg-red-50 p-4 dark:border-red-950 dark:bg-red-950/30">
                 <p className="text-sm font-semibold text-red-950 dark:text-red-100">
                   Recall this document?
                 </p>
@@ -228,7 +228,7 @@ export function SenderApprovalView({
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   <Button
-                    className="rounded-xl"
+                    className="rounded-none"
                     disabled={busy}
                     onClick={() => setConfirming(false)}
                     size="sm"
@@ -238,7 +238,7 @@ export function SenderApprovalView({
                     Cancel
                   </Button>
                   <Button
-                    className="rounded-xl"
+                    className="rounded-none"
                     disabled={busy}
                     onClick={() => void recall()}
                     size="sm"
@@ -266,7 +266,7 @@ export function SenderApprovalView({
         )}
       </section>
 
-      <section className="rounded-3xl border bg-card p-5 shadow-sm sm:p-6">
+      <section className="rounded-none border bg-card p-5 shadow-sm sm:p-6">
         <h2 className="font-heading text-lg font-semibold">Approval path</h2>
         <p className="mt-1 mb-4 text-sm leading-6 text-muted-foreground">
           Round {document.approvalRound}. Later steps become active only as
@@ -276,13 +276,13 @@ export function SenderApprovalView({
       </section>
 
       {history.length > 0 && (
-        <section className="rounded-3xl border bg-card p-5 shadow-sm sm:p-6">
+        <section className="rounded-none border bg-card p-5 shadow-sm sm:p-6">
           <h2 className="font-heading text-lg font-semibold">
             Decision history
           </h2>
           <ol className="mt-3 space-y-3">
             {history.map((step) => (
-              <li className="rounded-2xl border p-3.5 text-sm" key={step.id}>
+              <li className="rounded-none border p-3.5 text-sm" key={step.id}>
                 <p className="font-semibold">
                   {step.decision === "APPROVED" ? "Approved" : "Returned"} at
                   step {step.stepNumber} by {roleLabel(step.approverRole)}
@@ -292,7 +292,7 @@ export function SenderApprovalView({
                   round {step.approvalRound}
                 </p>
                 {step.returnReason && (
-                  <p className="mt-2 rounded-lg bg-muted/50 px-2.5 py-1.5 text-xs leading-5">
+                  <p className="mt-2 rounded-none bg-muted/50 px-2.5 py-1.5 text-xs leading-5">
                     {step.returnReason}
                   </p>
                 )}

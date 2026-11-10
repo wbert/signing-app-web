@@ -13,7 +13,7 @@ export default function NotFound() {
         <p className="mt-3 text-sm leading-6 text-muted-foreground">
           The page may have moved, or your account may not have access to it.
         </p>
-        <Button className="mt-6 rounded-xl" render={<Link href="/dashboard" />}>
+        <Button className="mt-6 rounded-none" render={<Link href="/dashboard" />}>
           Return to dashboard
         </Button>
       </div>

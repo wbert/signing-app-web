@@ -117,7 +117,7 @@ export function ApprovalInbox() {
     <DocumentShell
       actions={
         <Button
-          className="rounded-xl"
+          className="rounded-none"
           disabled={refreshing}
           onClick={() => void load({ foreground: false })}
           size="lg"
@@ -132,13 +132,13 @@ export function ApprovalInbox() {
       session={session}
       title="Your approval queue"
     >
-      <section className="mt-8 rounded-3xl border bg-card shadow-sm">
+      <section className="mt-8 rounded-none border bg-card shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b p-4 sm:p-5">
           <p className="text-sm font-semibold">
             {approvals.length} awaiting your decision
           </p>
           {overdueCount > 0 && (
-            <p className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-[0.68rem] font-bold tracking-wide text-amber-900 uppercase dark:border-amber-950 dark:bg-amber-950/40 dark:text-amber-300">
+            <p className="inline-flex items-center gap-1.5 rounded-none border border-amber-200 bg-amber-50 px-2.5 py-1 text-[0.68rem] font-bold tracking-wide text-amber-900 uppercase dark:border-amber-950 dark:bg-amber-950/40 dark:text-amber-300">
               <Clock className="size-3" />
               {overdueCount} past the reminder interval
             </p>
@@ -148,7 +148,7 @@ export function ApprovalInbox() {
         {approvals.length === 0 ? (
           <div className="grid min-h-72 place-items-center p-8 text-center">
             <div>
-              <span className="mx-auto grid size-12 place-items-center rounded-2xl bg-muted text-muted-foreground">
+              <span className="mx-auto grid size-12 place-items-center rounded-none bg-muted text-muted-foreground">
                 <Inbox className="size-5" />
               </span>
               <h2 className="mt-4 font-heading text-xl font-semibold">
@@ -172,7 +172,7 @@ export function ApprovalInbox() {
                     href={`/approvals/${step.id}`}
                   >
                     <div className="flex min-w-0 items-center gap-3.5">
-                      <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+                      <span className="grid size-10 shrink-0 place-items-center rounded-none bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
                         <ClipboardCheck className="size-4" />
                       </span>
                       <div className="min-w-0">

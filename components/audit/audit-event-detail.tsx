@@ -134,7 +134,7 @@ export function AuditEventDetail({ eventId }: { eventId: string }) {
         session={session}
         title="Event not found"
       >
-        <div className="mt-8 rounded-3xl border bg-card p-10 text-center">
+        <div className="mt-8 rounded-none border bg-card p-10 text-center">
           <FileQuestion className="mx-auto size-7 text-muted-foreground" />
           <p className="mx-auto mt-4 max-w-md text-sm leading-6 text-muted-foreground">
             The identifier may be mistyped, or it may belong to a different
@@ -142,7 +142,7 @@ export function AuditEventDetail({ eventId }: { eventId: string }) {
             that existed here still does.
           </p>
           <Button
-            className="mt-6 rounded-xl"
+            className="mt-6 rounded-none"
             render={<Link href="/audit" />}
             variant="outline"
           >
@@ -166,12 +166,12 @@ export function AuditEventDetail({ eventId }: { eventId: string }) {
       title={describeEventType(event.eventType)}
     >
       <div className="mt-8 space-y-5">
-        <p className="flex items-center gap-2 rounded-2xl border bg-muted/25 px-4 py-3 text-xs text-muted-foreground">
+        <p className="flex items-center gap-2 rounded-none border bg-muted/25 px-4 py-3 text-xs text-muted-foreground">
           <Lock className="size-3.5 shrink-0" />
           This record is permanent. It cannot be amended or deleted.
         </p>
 
-        <section className="rounded-3xl border bg-card p-5 sm:p-7">
+        <section className="rounded-none border bg-card p-5 sm:p-7">
           <h2 className="font-heading text-lg font-semibold tracking-tight">
             What happened
           </h2>
@@ -193,7 +193,7 @@ export function AuditEventDetail({ eventId }: { eventId: string }) {
           </dl>
         </section>
 
-        <section className="rounded-3xl border bg-card p-5 sm:p-7">
+        <section className="rounded-none border bg-card p-5 sm:p-7">
           <h2 className="font-heading text-lg font-semibold tracking-tight">
             Recorded detail
           </h2>

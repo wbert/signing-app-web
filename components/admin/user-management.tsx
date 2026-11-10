@@ -15,10 +15,8 @@ import {
   ChevronLeft,
   ChevronRight,
   CircleAlert,
-  CircleUserRound,
   KeyRound,
   LoaderCircle,
-  LogOut,
   MailPlus,
   PencilLine,
   Plus,
@@ -33,7 +31,7 @@ import {
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
-import { BrandLockup } from "@/components/brand/brand-lockup"
+import { PageSkeleton } from "@/components/app/page-skeleton"
 import { Button } from "@/components/ui/button"
 import {
   ApiError,
@@ -77,7 +75,6 @@ export function UserManagement() {
   const [hasNextPage, setHasNextPage] = useState(false)
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
-  const [signingOut, setSigningOut] = useState(false)
   const [query, setQuery] = useState("")
   const [notice, setNotice] = useState<Notice | null>(null)
   const [loadError, setLoadError] = useState<Notice | null>(null)
@@ -173,16 +170,6 @@ export function UserManagement() {
     )
   }
 
-  async function signOut() {
-    setSigningOut(true)
-    try {
-      await apiRequest("/api/auth/sign-out", { method: "POST", body: {} })
-    } finally {
-      router.replace("/login")
-      router.refresh()
-    }
-  }
-
   if (loading) {
     return <FullPageStatus message="Loading user administration…" />
   }
@@ -209,48 +196,7 @@ export function UserManagement() {
   ).length
 
   return (
-    <div className="min-h-svh bg-[#f5f7f3] dark:bg-background">
-      <header className="border-b bg-background/95 backdrop-blur">
-        <div className="mx-auto flex h-20 max-w-[90rem] items-center justify-between px-5 sm:px-8">
-          <div className="flex items-center gap-5">
-            <BrandLockup />
-            <span className="hidden h-7 w-px bg-border md:block" />
-            <Link
-              className="hidden items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-foreground md:flex"
-              href="/dashboard"
-            >
-              <ArrowLeft className="size-3.5" />
-              Workspace
-            </Link>
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="hidden text-right sm:block">
-              <p className="text-sm font-semibold">{session.user.fullName}</p>
-              <p className="text-xs text-muted-foreground">
-                @{session.user.username}
-              </p>
-            </div>
-            <div className="grid size-10 place-items-center rounded-full border bg-card text-muted-foreground">
-              <CircleUserRound className="size-5" />
-            </div>
-            <Button
-              aria-label="Sign out"
-              className="rounded-xl"
-              disabled={signingOut}
-              onClick={signOut}
-              size="icon"
-              variant="ghost"
-            >
-              {signingOut ? (
-                <LoaderCircle className="animate-spin" />
-              ) : (
-                <LogOut />
-              )}
-            </Button>
-          </div>
-        </div>
-      </header>
-
+    <>
       <main className="mx-auto max-w-[90rem] px-5 py-8 sm:px-8 sm:py-10">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -274,7 +220,7 @@ export function UserManagement() {
           </div>
           {canCreate && (
             <Button
-              className="rounded-xl"
+              className="rounded-none"
               onClick={() => setDialog("create")}
               size="lg"
             >
@@ -311,7 +257,7 @@ export function UserManagement() {
           )}
         </div>
 
-        <section className="mt-6 overflow-hidden rounded-3xl border bg-card shadow-sm">
+        <section className="mt-6 overflow-hidden rounded-none border bg-card shadow-sm">
           <div className="flex flex-col gap-4 border-b p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
             <div className="relative w-full max-w-md">
               <Search className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-muted-foreground" />
@@ -330,7 +276,7 @@ export function UserManagement() {
               </p>
               <Button
                 aria-label="Refresh users"
-                className="rounded-xl"
+                className="rounded-none"
                 disabled={refreshing}
                 onClick={() => void loadPage(offset, { foreground: false })}
                 size="icon-sm"
@@ -370,7 +316,7 @@ export function UserManagement() {
                     <tr className="align-middle" key={user.id}>
                       <td className="px-5 py-4">
                         <div className="flex items-center gap-3">
-                          <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-sm font-bold text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+                          <span className="grid size-10 shrink-0 place-items-center rounded-none bg-emerald-50 text-sm font-bold text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
                             {initials(user.fullName)}
                           </span>
                           <div className="min-w-0">
@@ -410,7 +356,7 @@ export function UserManagement() {
                       </td>
                       <td className="px-5 py-4 text-right">
                         <Button
-                          className="rounded-xl"
+                          className="rounded-none"
                           onClick={() => setDialog(user.id)}
                           size="sm"
                           variant="outline"
@@ -434,7 +380,7 @@ export function UserManagement() {
             <div className="flex gap-2">
               <Button
                 aria-label="Previous page"
-                className="rounded-xl"
+                className="rounded-none"
                 disabled={offset === 0 || refreshing}
                 onClick={() =>
                   void loadPage(Math.max(0, offset - PAGE_SIZE), {
@@ -448,7 +394,7 @@ export function UserManagement() {
               </Button>
               <Button
                 aria-label="Next page"
-                className="rounded-xl"
+                className="rounded-none"
                 disabled={!hasNextPage || refreshing}
                 onClick={() =>
                   void loadPage(offset + PAGE_SIZE, { foreground: false })
@@ -491,7 +437,7 @@ export function UserManagement() {
           user={selectedUser}
         />
       )}
-    </div>
+    </>
   )
 }
 
@@ -599,7 +545,7 @@ function ProvisionUserDialog({
           />
         </Field>
         <RolePicker roles={assignedRoles} setRoles={setAssignedRoles} />
-        <div className="rounded-xl border border-emerald-900/10 bg-emerald-50/70 p-3 text-xs leading-5 text-emerald-950 dark:bg-emerald-950/40 dark:text-emerald-100">
+        <div className="rounded-none border border-emerald-900/10 bg-emerald-50/70 p-3 text-xs leading-5 text-emerald-950 dark:bg-emerald-950/40 dark:text-emerald-100">
           <div className="flex gap-2">
             <MailPlus className="mt-0.5 size-4 shrink-0" />
             The user receives a time-limited setup link. No password is shown to
@@ -608,7 +554,7 @@ function ProvisionUserDialog({
         </div>
         <div className="flex flex-col-reverse gap-2 pt-2 sm:flex-row sm:justify-end">
           <Button
-            className="rounded-xl"
+            className="rounded-none"
             disabled={busy}
             onClick={onClose}
             type="button"
@@ -617,7 +563,7 @@ function ProvisionUserDialog({
             Cancel
           </Button>
           <Button
-            className="rounded-xl"
+            className="rounded-none"
             disabled={busy || assignedRoles.length === 0}
             type="submit"
           >
@@ -724,7 +670,7 @@ function ManageUserDialog({
       </div>
 
       {user.id === currentUserId && (
-        <div className="mt-4 rounded-xl border border-amber-300/70 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
+        <div className="mt-4 rounded-none border border-amber-300/70 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
           You are managing your own account. Changing your roles or status may
           end this session.
         </div>
@@ -749,7 +695,7 @@ function ManageUserDialog({
         {canUpdate && (
           <div className="mt-4 flex justify-end">
             <Button
-              className="rounded-xl"
+              className="rounded-none"
               disabled={roleBusy || assignedRoles.length === 0 || !rolesChanged}
               size="sm"
               type="submit"
@@ -773,7 +719,7 @@ function ManageUserDialog({
         </p>
 
         {!canReactivate && (
-          <div className="mt-3 rounded-xl border border-amber-300/70 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
+          <div className="mt-3 rounded-none border border-amber-300/70 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
             This account must complete MFA enrollment before it can be
             activated.
           </div>
@@ -781,7 +727,7 @@ function ManageUserDialog({
 
         {canUpdate && !confirmStatus && (
           <Button
-            className="mt-4 rounded-xl"
+            className="mt-4 rounded-none"
             disabled={!canReactivate}
             onClick={() => setConfirmStatus(true)}
             size="sm"
@@ -796,7 +742,7 @@ function ManageUserDialog({
         )}
 
         {canUpdate && confirmStatus && (
-          <div className="mt-4 rounded-2xl border border-red-200 bg-red-50 p-4 dark:border-red-950 dark:bg-red-950/30">
+          <div className="mt-4 rounded-none border border-red-200 bg-red-50 p-4 dark:border-red-950 dark:bg-red-950/30">
             <p className="text-sm font-semibold text-red-950 dark:text-red-100">
               {nextStatus === "DISABLED"
                 ? `Disable ${user.fullName}?`
@@ -809,7 +755,7 @@ function ManageUserDialog({
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               <Button
-                className="rounded-xl"
+                className="rounded-none"
                 disabled={statusBusy}
                 onClick={() => setConfirmStatus(false)}
                 size="sm"
@@ -819,7 +765,7 @@ function ManageUserDialog({
                 Cancel
               </Button>
               <Button
-                className="rounded-xl"
+                className="rounded-none"
                 disabled={statusBusy}
                 onClick={() => void changeStatus()}
                 size="sm"
@@ -846,7 +792,7 @@ function ManageUserDialog({
 
       <div className="my-6 h-px bg-border" />
 
-      <section className="rounded-2xl border bg-muted/25 p-4">
+      <section className="rounded-none border bg-muted/25 p-4">
         <div className="flex gap-3">
           <KeyRound className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
           <div>
@@ -879,7 +825,7 @@ function ManagementDialog({
       <Dialog.Portal>
         <Dialog.Backdrop className="fixed inset-0 z-40 bg-emerald-950/45 backdrop-blur-[2px]" />
         <Dialog.Viewport className="fixed inset-0 z-50 grid items-end overflow-y-auto p-0 sm:items-center sm:justify-items-center sm:p-6">
-          <Dialog.Popup className="max-h-[95svh] w-full overflow-y-auto rounded-t-3xl border bg-background p-5 shadow-2xl outline-none sm:max-w-2xl sm:rounded-3xl sm:p-7">
+          <Dialog.Popup className="max-h-[95svh] w-full overflow-y-auto rounded-t-3xl border bg-background p-5 shadow-2xl outline-none sm:max-w-2xl sm:rounded-none sm:p-7">
             <div className="flex items-start justify-between gap-5">
               <div>
                 <Dialog.Title className="font-heading text-2xl font-semibold tracking-tight">
@@ -891,7 +837,7 @@ function ManagementDialog({
               </div>
               <Dialog.Close
                 aria-label="Close"
-                className="grid size-9 shrink-0 place-items-center rounded-xl text-muted-foreground transition hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"
+                className="grid size-9 shrink-0 place-items-center rounded-none text-muted-foreground transition hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"
               >
                 <X className="size-4" />
               </Dialog.Close>
@@ -930,7 +876,7 @@ function RolePicker({
           return (
             <label
               className={cn(
-                "flex cursor-pointer gap-3 rounded-xl border p-3 transition",
+                "flex cursor-pointer gap-3 rounded-none border p-3 transition",
                 checked
                   ? "border-emerald-700/35 bg-emerald-50/70 dark:bg-emerald-950/35"
                   : "hover:bg-muted/50",
@@ -989,8 +935,8 @@ function SummaryCard({
   value: number
 }) {
   return (
-    <div className="flex items-center gap-3 rounded-2xl border bg-card px-4 py-4 shadow-xs">
-      <span className="grid size-9 place-items-center rounded-xl bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+    <div className="flex items-center gap-3 rounded-none border bg-card px-4 py-4 shadow-xs">
+      <span className="grid size-9 place-items-center rounded-none bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
         {icon}
       </span>
       <div>
@@ -1003,7 +949,7 @@ function SummaryCard({
 
 function RoleBadge({ role }: { role: Role }) {
   return (
-    <span className="rounded-full border bg-muted/40 px-2.5 py-1 text-[0.62rem] font-bold tracking-wide text-muted-foreground uppercase">
+    <span className="rounded-none border bg-muted/40 px-2.5 py-1 text-[0.62rem] font-bold tracking-wide text-muted-foreground uppercase">
       {roleLabel(role)}
     </span>
   )
@@ -1030,7 +976,7 @@ function StatusBadge({ status }: { status: AccountStatus }) {
   return (
     <span
       className={cn(
-        "inline-flex rounded-full border px-2.5 py-1 text-[0.64rem] font-bold tracking-wide uppercase",
+        "inline-flex rounded-none border px-2.5 py-1 text-[0.64rem] font-bold tracking-wide uppercase",
         styles[status]
       )}
     >
@@ -1049,7 +995,7 @@ function NoticeBanner({
   return (
     <div
       className={cn(
-        "flex items-start justify-between gap-4 rounded-2xl border px-4 py-3 text-sm",
+        "flex items-start justify-between gap-4 rounded-none border px-4 py-3 text-sm",
         notice.tone === "success"
           ? "border-emerald-200 bg-emerald-50 text-emerald-950 dark:border-emerald-950 dark:bg-emerald-950/35 dark:text-emerald-100"
           : "border-red-200 bg-red-50 text-red-950 dark:border-red-950 dark:bg-red-950/35 dark:text-red-100"
@@ -1074,7 +1020,7 @@ function NoticeBanner({
       {onDismiss && (
         <button
           aria-label="Dismiss message"
-          className="shrink-0 rounded-lg p-1 opacity-60 hover:bg-black/5 hover:opacity-100"
+          className="shrink-0 rounded-none p-1 opacity-60 hover:bg-black/5 hover:opacity-100"
           onClick={onDismiss}
           type="button"
         >
@@ -1089,7 +1035,7 @@ function EmptyUsers({ filtered }: { filtered: boolean }) {
   return (
     <div className="grid min-h-72 place-items-center p-8 text-center">
       <div>
-        <span className="mx-auto grid size-12 place-items-center rounded-2xl bg-muted text-muted-foreground">
+        <span className="mx-auto grid size-12 place-items-center rounded-none bg-muted text-muted-foreground">
           <UsersRound className="size-5" />
         </span>
         <h2 className="mt-4 font-heading text-xl font-semibold">
@@ -1106,17 +1052,7 @@ function EmptyUsers({ filtered }: { filtered: boolean }) {
 }
 
 function FullPageStatus({ message }: { message: string }) {
-  return (
-    <main className="grid min-h-svh place-items-center bg-[#f5f7f3] dark:bg-background">
-      <div
-        className="flex items-center gap-3 text-sm text-muted-foreground"
-        role="status"
-      >
-        <LoaderCircle className="size-4 animate-spin" />
-        {message}
-      </div>
-    </main>
-  )
+  return <PageSkeleton message={message} />
 }
 
 function FullPageError({
@@ -1127,8 +1063,8 @@ function FullPageError({
   onRetry: () => void
 }) {
   return (
-    <main className="grid min-h-svh place-items-center bg-[#f5f7f3] p-6 dark:bg-background">
-      <div className="w-full max-w-md rounded-3xl border bg-card p-7 text-center shadow-sm">
+    <main className="grid min-h-[60svh] place-items-center bg-background p-6 dark:bg-background">
+      <div className="w-full max-w-md rounded-none border bg-card p-7 text-center shadow-sm">
         <CircleAlert className="mx-auto size-7 text-red-700" />
         <h1 className="mt-4 font-heading text-xl font-semibold">
           Unable to load user administration
@@ -1141,7 +1077,7 @@ function FullPageError({
             Reference {notice.reference}
           </p>
         )}
-        <Button className="mt-5 rounded-xl" onClick={onRetry}>
+        <Button className="mt-5 rounded-none" onClick={onRetry}>
           <RefreshCw />
           Try again
         </Button>

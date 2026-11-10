@@ -1,7 +1,8 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useState } from "react"
-import { ChevronLeft, ChevronRight, LoaderCircle } from "lucide-react"
+import { Skeleton } from "@/components/ui/skeleton"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import { PdfPageCanvas } from "@/components/documents/pdf-page-canvas"
 import { Button } from "@/components/ui/button"
@@ -75,11 +76,11 @@ export function PdfPreview({
 
   return (
     <div>
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border bg-muted/25 px-4 py-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-none border bg-muted/25 px-4 py-3">
         <div className="flex items-center gap-2">
           <Button
             aria-label="Previous page"
-            className="rounded-xl"
+            className="rounded-none"
             disabled={pageNumber <= 1}
             onClick={() => setPageNumber((current) => Math.max(1, current - 1))}
             size="icon-sm"
@@ -95,7 +96,7 @@ export function PdfPreview({
           </p>
           <Button
             aria-label="Next page"
-            className="rounded-xl"
+            className="rounded-none"
             disabled={pageNumber >= pages.length}
             onClick={() =>
               setPageNumber((current) => Math.min(pages.length, current + 1))
@@ -109,23 +110,27 @@ export function PdfPreview({
         </div>
       </div>
 
-      <div className="mt-3 rounded-2xl border bg-muted/20 p-4" ref={container}>
+      <div className="mt-3 rounded-none border bg-muted/20 p-4" ref={container}>
         {failed ? (
           <p className="py-10 text-center text-sm leading-6 text-muted-foreground">
             The document could not be loaded from storage. Its preview link is
             short lived — reload this page to request a new one.
           </p>
         ) : !bytes || !page ? (
-          <p
-            className="flex items-center justify-center gap-2 py-10 text-sm text-muted-foreground"
+          <div
             role="status"
+            aria-busy="true"
+            className="mx-auto max-w-xl space-y-4 border bg-card p-8"
           >
-            <LoaderCircle className="size-4 animate-spin" />
-            Loading the document…
-          </p>
+            <span className="sr-only">Loading the document…</span>
+            <Skeleton className="h-6 w-1/2" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-4/5" />
+            <Skeleton className="h-80 w-full" />
+          </div>
         ) : (
           <div
-            className="relative mx-auto overflow-hidden rounded-lg border bg-white dark:bg-neutral-100"
+            className="relative mx-auto overflow-hidden rounded-none border bg-white dark:bg-neutral-100"
             style={{ width: surface.width, height: surface.height }}
           >
             <PdfPageCanvas

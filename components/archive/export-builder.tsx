@@ -158,7 +158,7 @@ export function ExportBuilder({
           </p>
         ) : preview ? (
           <>
-            <div className="rounded-2xl border bg-muted/25 px-5 py-4">
+            <div className="rounded-none border bg-muted/25 px-5 py-4">
               <p className="text-sm font-semibold">
                 {preview.count === 0
                   ? "No records match these filters"
@@ -212,7 +212,7 @@ export function ExportBuilder({
 
                 <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
                   <Button
-                    className="rounded-xl"
+                    className="rounded-none"
                     disabled={busy !== null}
                     onClick={onClose}
                     type="button"
@@ -221,7 +221,7 @@ export function ExportBuilder({
                     Cancel
                   </Button>
                   <Button
-                    className="rounded-xl"
+                    className="rounded-none"
                     disabled={busy !== null || !preview.canCreate}
                     onClick={() => void create()}
                     type="button"
@@ -256,7 +256,7 @@ function CreatedPackage({
 
   return (
     <div>
-      <div className="rounded-2xl border bg-card px-5 py-4">
+      <div className="rounded-none border bg-card px-5 py-4">
         <p className="text-sm font-semibold">
           {packageView.itemCount}{" "}
           {packageView.itemCount === 1 ? "record" : "records"} packaged ·{" "}
@@ -270,7 +270,7 @@ function CreatedPackage({
 
       {missing.length > 0 && (
         <div
-          className="mt-4 rounded-2xl border border-amber-300/70 bg-amber-50 px-5 py-4 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100"
+          className="mt-4 rounded-none border border-amber-300/70 bg-amber-50 px-5 py-4 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100"
           role="alert"
         >
           <p className="flex items-center gap-2 text-sm font-semibold">
@@ -296,7 +296,7 @@ function CreatedPackage({
       )}
 
       <div className="mt-5 flex justify-end">
-        <Button className="rounded-xl" disabled={busy} onClick={onDownload}>
+        <Button className="rounded-none" disabled={busy} onClick={onDownload}>
           {busy ? <LoaderCircle className="animate-spin" /> : <Download />}
           Download ZIP
         </Button>

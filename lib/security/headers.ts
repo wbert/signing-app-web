@@ -40,7 +40,15 @@ export function buildContentSecurityPolicy(options: SecurityOptions): string {
         ...(options.isDevelopment ? ["'unsafe-eval'"] : []),
       ],
     ],
-    ["style-src", ["'self'", `'nonce-${options.nonce}'`]],
+    // Next's development overlay and hot-reloaded styles are injected without
+    // a nonce. Keep stylesheet nonces enforced in production.
+    [
+      "style-src",
+      [
+        "'self'",
+        options.isDevelopment ? "'unsafe-inline'" : `'nonce-${options.nonce}'`,
+      ],
+    ],
     // Element sizing is computed from PDF page geometry and applied as a style
     // attribute, which CSP treats separately from stylesheets.
     ["style-src-attr", ["'unsafe-inline'"]],

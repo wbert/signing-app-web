@@ -72,6 +72,18 @@ describe("buildContentSecurityPolicy", () => {
     )
   })
 
+  it("allows development overlay styles while requiring nonces in production", () => {
+    expect(
+      directive(
+        buildContentSecurityPolicy({ ...base, isDevelopment: true }),
+        "style-src"
+      )
+    ).toBe("style-src 'self' 'unsafe-inline'")
+    expect(directive(buildContentSecurityPolicy(base), "style-src")).toBe(
+      "style-src 'self' 'nonce-test-nonce'"
+    )
+  })
+
   it("refuses framing, plugins, and base-tag rewriting", () => {
     const policy = buildContentSecurityPolicy(base)
     expect(directive(policy, "frame-ancestors")).toBe("frame-ancestors 'none'")

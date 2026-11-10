@@ -1,8 +1,9 @@
 "use client"
 
 import { Dialog } from "@base-ui/react/dialog"
-import { Check, CircleAlert, LoaderCircle, RefreshCw, X } from "lucide-react"
+import { Check, CircleAlert, RefreshCw, X } from "lucide-react"
 
+import { PageSkeleton } from "@/components/app/page-skeleton"
 import { Button } from "@/components/ui/button"
 import { ApiError, userMessageForApiError } from "@/lib/api/client"
 import { cn } from "@/lib/utils"
@@ -32,7 +33,7 @@ export function NoticeBanner({
   return (
     <div
       className={cn(
-        "flex items-start justify-between gap-4 rounded-2xl border px-4 py-3 text-sm",
+        "flex items-start justify-between gap-4 rounded-none border px-4 py-3 text-sm",
         noticeTones[notice.tone]
       )}
       role={notice.tone === "success" ? "status" : "alert"}
@@ -55,7 +56,7 @@ export function NoticeBanner({
       {onDismiss && (
         <button
           aria-label="Dismiss message"
-          className="shrink-0 rounded-lg p-1 opacity-60 hover:bg-black/5 hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"
+          className="shrink-0 rounded-none p-1 opacity-60 hover:bg-black/5 hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"
           onClick={onDismiss}
           type="button"
         >
@@ -86,7 +87,7 @@ export function ManagementDialog({
         <Dialog.Viewport className="fixed inset-0 z-50 grid items-end overflow-y-auto p-0 sm:items-center sm:justify-items-center sm:p-6">
           <Dialog.Popup
             className={cn(
-              "max-h-[95svh] w-full overflow-y-auto rounded-t-3xl border bg-background p-5 shadow-2xl outline-none sm:rounded-3xl sm:p-7",
+              "max-h-[95svh] w-full overflow-y-auto rounded-t-3xl border bg-background p-5 shadow-2xl outline-none sm:rounded-none sm:p-7",
               wide ? "sm:max-w-3xl" : "sm:max-w-2xl"
             )}
           >
@@ -101,7 +102,7 @@ export function ManagementDialog({
               </div>
               <Dialog.Close
                 aria-label="Close"
-                className="grid size-9 shrink-0 place-items-center rounded-xl text-muted-foreground transition hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"
+                className="grid size-9 shrink-0 place-items-center rounded-none text-muted-foreground transition hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"
               >
                 <X className="size-4" />
               </Dialog.Close>
@@ -144,17 +145,7 @@ export function Field({
 }
 
 export function FullPageStatus({ message }: { message: string }) {
-  return (
-    <main className="grid min-h-svh place-items-center bg-[#f5f7f3] dark:bg-background">
-      <div
-        className="flex items-center gap-3 text-sm text-muted-foreground"
-        role="status"
-      >
-        <LoaderCircle className="size-4 animate-spin" />
-        {message}
-      </div>
-    </main>
-  )
+  return <PageSkeleton message={message} />
 }
 
 export function FullPageError({
@@ -167,8 +158,8 @@ export function FullPageError({
   onRetry: () => void
 }) {
   return (
-    <main className="grid min-h-svh place-items-center bg-[#f5f7f3] p-6 dark:bg-background">
-      <div className="w-full max-w-md rounded-3xl border bg-card p-7 text-center shadow-sm">
+    <main className="grid min-h-[60svh] place-items-center bg-background p-6 dark:bg-background">
+      <div className="w-full max-w-md rounded-none border bg-card p-7 text-center shadow-sm">
         <CircleAlert className="mx-auto size-7 text-red-700" />
         <h1 className="mt-4 font-heading text-xl font-semibold">{heading}</h1>
         <p className="mt-2 text-sm leading-6 text-muted-foreground">
@@ -179,7 +170,7 @@ export function FullPageError({
             Support reference {notice.reference}
           </p>
         )}
-        <Button className="mt-5 rounded-xl" onClick={onRetry}>
+        <Button className="mt-5 rounded-none" onClick={onRetry}>
           <RefreshCw />
           Try again
         </Button>

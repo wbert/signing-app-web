@@ -30,7 +30,7 @@ export function WorkflowStatusBadge({
   return (
     <span
       className={cn(
-        "inline-flex shrink-0 items-center rounded-full border px-2.5 py-1 text-[0.68rem] font-semibold",
+        "inline-flex shrink-0 items-center rounded-none border px-2.5 py-1 text-[0.68rem] font-semibold",
         tones[status]
       )}
     >

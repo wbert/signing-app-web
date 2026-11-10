@@ -321,7 +321,7 @@ export function SigningJourney() {
     return (
       <SigningShell>
         <p
-          className="flex items-center justify-center gap-2 rounded-3xl border bg-card py-16 text-sm text-muted-foreground"
+          className="flex items-center justify-center gap-2 rounded-none border bg-card py-16 text-sm text-muted-foreground"
           role="status"
         >
           <LoaderCircle className="size-4 animate-spin" />
@@ -439,8 +439,8 @@ function AccessStage({
   const expiry = expiresAt ? describeExpiry(expiresAt) : null
 
   return (
-    <div className="rounded-3xl border bg-card p-6 shadow-sm sm:p-8">
-      <span className="grid size-11 place-items-center rounded-2xl bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300">
+    <div className="rounded-none border bg-card p-6 shadow-sm sm:p-8">
+      <span className="grid size-11 place-items-center rounded-none bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300">
         <LockKeyhole className="size-5" />
       </span>
       <h1 className="mt-4 font-heading text-2xl font-semibold tracking-tight">
@@ -478,7 +478,7 @@ function AccessStage({
           value={value}
         />
         <Button
-          className="mt-5 w-full rounded-xl"
+          className="mt-5 w-full rounded-none"
           disabled={busy || value.length !== 6}
           size="lg"
           type="submit"
@@ -506,7 +506,7 @@ function ReviewIntro({
     <div className="space-y-5">
       {onStopRereading && (
         <Button
-          className="rounded-xl"
+          className="rounded-none"
           onClick={onStopRereading}
           size="sm"
           type="button"
@@ -517,7 +517,7 @@ function ReviewIntro({
         </Button>
       )}
 
-      <div className="rounded-2xl border bg-card px-5 py-4">
+      <div className="rounded-none border bg-card px-5 py-4">
         <p className="flex items-center gap-2 text-sm font-semibold">
           <BookOpenCheck className="size-4" />
           Read all {session.pageCount}{" "}
@@ -547,11 +547,11 @@ function ConsentPanel({
   session: SigningSession
 }) {
   return (
-    <div className="rounded-3xl border bg-card p-5 shadow-sm sm:p-7">
+    <div className="rounded-none border bg-card p-5 shadow-sm sm:p-7">
       <h2 className="font-heading text-xl font-semibold tracking-tight">
         Agreement to sign electronically
       </h2>
-      <p className="mt-3 rounded-2xl border bg-muted/30 px-4 py-3 text-sm leading-6">
+      <p className="mt-3 rounded-none border bg-muted/30 px-4 py-3 text-sm leading-6">
         {session.consentText}
       </p>
       <p className="mt-2 text-xs text-muted-foreground">
@@ -577,7 +577,7 @@ function ConsentPanel({
             </span>
           </label>
           <Button
-            className="mt-5 w-full rounded-xl sm:w-auto"
+            className="mt-5 w-full rounded-none sm:w-auto"
             disabled={busy || !consentChecked || !session.lastPageViewed}
             onClick={onConsent}
             size="lg"
@@ -628,7 +628,7 @@ function SignStage({
 
   return (
     <div className="space-y-5">
-      <div className="rounded-3xl border bg-card p-5 shadow-sm sm:p-7">
+      <div className="rounded-none border bg-card p-5 shadow-sm sm:p-7">
         <h2 className="font-heading text-xl font-semibold tracking-tight">
           Add your signature
         </h2>
@@ -646,7 +646,7 @@ function SignStage({
         </div>
 
         <Button
-          className="mt-6 w-full rounded-xl"
+          className="mt-6 w-full rounded-none"
           disabled={working || capture === null}
           onClick={onSign}
           size="lg"
@@ -660,7 +660,7 @@ function SignStage({
           Sign this document
         </Button>
         <Button
-          className="mt-2 w-full rounded-xl"
+          className="mt-2 w-full rounded-none"
           disabled={working}
           onClick={onReread}
           size="sm"
@@ -672,7 +672,7 @@ function SignStage({
         </Button>
       </div>
 
-      <div className="rounded-3xl border bg-card p-5 shadow-sm sm:p-7">
+      <div className="rounded-none border bg-card p-5 shadow-sm sm:p-7">
         <h2 className="font-heading text-lg font-semibold tracking-tight">
           If you cannot sign this
         </h2>
@@ -700,7 +700,7 @@ function SignStage({
             </p>
             <div className="mt-4 flex flex-col gap-2 sm:flex-row">
               <Button
-                className="rounded-xl"
+                className="rounded-none"
                 disabled={working || declineReason.trim().length === 0}
                 type="submit"
                 variant="destructive"
@@ -713,7 +713,7 @@ function SignStage({
                 Confirm decline
               </Button>
               <Button
-                className="rounded-xl"
+                className="rounded-none"
                 disabled={working}
                 onClick={onCancelDecline}
                 type="button"
@@ -730,7 +730,7 @@ function SignStage({
               you give.
             </p>
             <Button
-              className="mt-4 rounded-xl"
+              className="mt-4 rounded-none"
               disabled={working}
               onClick={onStartDecline}
               type="button"

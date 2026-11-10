@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { LoaderCircle } from "lucide-react"
+import { Skeleton } from "@/components/ui/skeleton"
 
 import {
   detachableCopy,
@@ -122,15 +122,17 @@ export function PdfPageCanvas({
         ref={canvasRef}
       />
       {status === "loading" && (
-        <p
-          className="absolute inset-0 grid place-items-center text-xs text-neutral-500"
+        <div
+          className="absolute inset-0 space-y-4 bg-white p-8"
           role="status"
+          aria-busy="true"
         >
-          <span className="flex items-center gap-2">
-            <LoaderCircle className="size-3.5 animate-spin" />
-            Rendering page {pageNumber}…
-          </span>
-        </p>
+          <span className="sr-only">Rendering page {pageNumber}…</span>
+          <Skeleton className="h-6 w-1/2" />
+          <Skeleton className="h-3 w-full" />
+          <Skeleton className="h-3 w-4/5" />
+          <Skeleton className="h-1/2 w-full" />
+        </div>
       )}
       {status === "error" && (
         <p

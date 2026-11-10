@@ -108,7 +108,7 @@ export function FieldPlacement({
 
   if (!page) {
     return (
-      <p className="rounded-2xl border bg-muted/30 p-4 text-sm text-muted-foreground">
+      <p className="rounded-none border bg-muted/30 p-4 text-sm text-muted-foreground">
         This document reported no pages, so fields cannot be placed.
       </p>
     )
@@ -118,7 +118,7 @@ export function FieldPlacement({
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-col gap-4 rounded-2xl border bg-card p-4 lg:flex-row lg:items-end lg:justify-between">
+      <div className="flex flex-col gap-4 rounded-none border bg-card p-4 lg:flex-row lg:items-end lg:justify-between">
         <div className="grid flex-1 gap-3 sm:grid-cols-2">
           <Field htmlFor="field-signatory" label="Signatory">
             <select
@@ -154,7 +154,7 @@ export function FieldPlacement({
         <div className="flex flex-wrap gap-2">
           <Button
             aria-pressed={armed}
-            className="rounded-xl"
+            className="rounded-none"
             disabled={noSignatories}
             onClick={() => setArmed((current) => !current)}
             size="sm"
@@ -165,7 +165,7 @@ export function FieldPlacement({
             {armed ? "Click the page" : "Place by clicking"}
           </Button>
           <Button
-            className="rounded-xl"
+            className="rounded-none"
             disabled={noSignatories}
             onClick={() => addField(CENTRED)}
             size="sm"
@@ -178,16 +178,16 @@ export function FieldPlacement({
       </div>
 
       {noSignatories && (
-        <p className="rounded-xl border border-amber-300/70 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
+        <p className="rounded-none border border-amber-300/70 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
           Add a signatory before placing fields. Every field must belong to one.
         </p>
       )}
 
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border bg-muted/25 px-4 py-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-none border bg-muted/25 px-4 py-3">
         <div className="flex items-center gap-2">
           <Button
             aria-label="Previous page"
-            className="rounded-xl"
+            className="rounded-none"
             disabled={pageNumber <= 1}
             onClick={() => setPageNumber((current) => Math.max(1, current - 1))}
             size="icon-sm"
@@ -201,7 +201,7 @@ export function FieldPlacement({
           </p>
           <Button
             aria-label="Next page"
-            className="rounded-xl"
+            className="rounded-none"
             disabled={pageNumber >= pages.length}
             onClick={() =>
               setPageNumber((current) => Math.min(pages.length, current + 1))
@@ -216,7 +216,7 @@ export function FieldPlacement({
         <div className="flex items-center gap-2">
           <Button
             aria-label="Zoom out"
-            className="rounded-xl"
+            className="rounded-none"
             disabled={zoomIndex === 0}
             onClick={() => setZoomIndex((current) => Math.max(0, current - 1))}
             size="icon-sm"
@@ -230,7 +230,7 @@ export function FieldPlacement({
           </p>
           <Button
             aria-label="Zoom in"
-            className="rounded-xl"
+            className="rounded-none"
             disabled={zoomIndex === ZOOM_STEPS.length - 1}
             onClick={() =>
               setZoomIndex((current) =>
@@ -253,7 +253,7 @@ export function FieldPlacement({
         automatically.
       </p>
 
-      <div className="overflow-x-auto rounded-2xl border bg-muted/20 p-4">
+      <div className="overflow-x-auto rounded-none border bg-muted/20 p-4">
         <PageSurface
           armed={
             armed && activeReference
@@ -276,7 +276,7 @@ export function FieldPlacement({
 
       {fieldProblems.length > 0 && (
         <div
-          className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-950 dark:border-red-950 dark:bg-red-950/35 dark:text-red-100"
+          className="rounded-none border border-red-200 bg-red-50 p-4 text-sm text-red-950 dark:border-red-950 dark:bg-red-950/35 dark:text-red-100"
           role="alert"
         >
           <ul className="list-disc space-y-1 pl-5">
@@ -299,7 +299,7 @@ export function FieldPlacement({
             saved.
           </p>
         ) : (
-          <ul className="mt-3 divide-y rounded-2xl border bg-card">
+          <ul className="mt-3 divide-y rounded-none border bg-card">
             {fields.map((field) => (
               <li
                 className="flex flex-wrap items-center justify-between gap-3 px-4 py-3"
@@ -328,7 +328,7 @@ export function FieldPlacement({
                 </div>
                 <div className="flex gap-2">
                   <Button
-                    className="rounded-xl"
+                    className="rounded-none"
                     onClick={() => {
                       setPageNumber(field.pageNumber)
                       setSelectedKey(field.key)
@@ -342,7 +342,7 @@ export function FieldPlacement({
                   </Button>
                   <Button
                     aria-label={`Remove ${fieldKindLabels[field.kind]} for ${field.signatoryReference}`}
-                    className="rounded-xl"
+                    className="rounded-none"
                     onClick={() => removeField(field.key)}
                     size="icon-sm"
                     type="button"

@@ -38,7 +38,7 @@ export default function LoginPage() {
                 className="flex items-center gap-3 text-sm font-medium text-emerald-50/85"
                 key={text}
               >
-                <span className="grid size-8 place-items-center rounded-lg border border-white/10 bg-white/5">
+                <span className="grid size-8 place-items-center rounded-none border border-white/10 bg-white/5">
                   <Icon className="size-4 text-emerald-300" strokeWidth={1.8} />
                 </span>
                 {text}

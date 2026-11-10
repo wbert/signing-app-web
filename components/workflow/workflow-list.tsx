@@ -135,7 +135,7 @@ export function WorkflowList() {
     <DocumentShell
       actions={
         <Button
-          className="rounded-xl"
+          className="rounded-none"
           disabled={refreshing}
           onClick={() => void load({ foreground: false, status })}
           variant="outline"
@@ -173,7 +173,7 @@ export function WorkflowList() {
       )}
 
       {workflows.length === 0 ? (
-        <div className="mt-6 rounded-3xl border bg-card p-10 text-center">
+        <div className="mt-6 rounded-none border bg-card p-10 text-center">
           <WorkflowIcon className="mx-auto size-7 text-muted-foreground" />
           <h2 className="mt-4 font-heading text-xl font-semibold">
             {status === null
@@ -210,7 +210,7 @@ function FilterChip({
     <button
       aria-pressed={active}
       className={cn(
-        "rounded-full border px-3.5 py-1.5 text-xs font-semibold transition focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none",
+        "rounded-none border px-3.5 py-1.5 text-xs font-semibold transition focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none",
         active
           ? "border-emerald-700 bg-emerald-700 text-white"
           : "bg-card hover:bg-muted"
@@ -292,13 +292,13 @@ function WorkflowRow({ workflow }: { workflow: Workflow }) {
     <li>
       {openable ? (
         <Link
-          className="block rounded-3xl border bg-card p-5 transition hover:border-emerald-700/40 hover:bg-muted/40 focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"
+          className="block rounded-none border bg-card p-5 transition hover:border-emerald-700/40 hover:bg-muted/40 focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"
           href={`/workflows/${workflow.requestId}`}
         >
           {body}
         </Link>
       ) : (
-        <div className="rounded-3xl border bg-card p-5">
+        <div className="rounded-none border bg-card p-5">
           {body}
           <p className="mt-3 text-xs leading-5 text-muted-foreground">
             There is nothing to track yet. Signing invitations are issued once

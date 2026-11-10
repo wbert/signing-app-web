@@ -158,7 +158,7 @@ export function DocumentReader({
 
   if (failed) {
     return (
-      <p className="rounded-2xl border bg-card px-5 py-10 text-center text-sm leading-6 text-muted-foreground">
+      <p className="rounded-none border bg-card px-5 py-10 text-center text-sm leading-6 text-muted-foreground">
         The document could not be loaded. Its secure link is short lived —
         reload this page to request a new one.
       </p>
@@ -169,7 +169,7 @@ export function DocumentReader({
     <div ref={container}>
       {pages.length === 0 ? (
         <p
-          className="flex items-center justify-center gap-2 rounded-2xl border bg-card py-16 text-sm text-muted-foreground"
+          className="flex items-center justify-center gap-2 rounded-none border bg-card py-16 text-sm text-muted-foreground"
           role="status"
         >
           <LoaderCircle className="size-4 animate-spin" />
@@ -179,13 +179,13 @@ export function DocumentReader({
         <ol className="space-y-4">
           {surfaces.map(({ page, surface }) => (
             <li
-              className="relative overflow-hidden rounded-xl border bg-white shadow-sm dark:bg-neutral-100"
+              className="relative overflow-hidden rounded-none border bg-white shadow-sm dark:bg-neutral-100"
               data-page-number={page.pageNumber}
               key={page.pageNumber}
               ref={observePage(page.pageNumber)}
               style={{ height: surface.height }}
             >
-              <span className="absolute top-2 right-2 z-10 rounded-md bg-neutral-900/70 px-2 py-0.5 text-[0.65rem] font-semibold text-white">
+              <span className="absolute top-2 right-2 z-10 rounded-none bg-neutral-900/70 px-2 py-0.5 text-[0.65rem] font-semibold text-white">
                 {page.pageNumber} / {pages.length}
               </span>
               {document && drawablePages.has(page.pageNumber) ? (

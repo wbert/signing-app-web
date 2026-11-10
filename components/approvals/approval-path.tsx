@@ -66,11 +66,11 @@ export function ApprovalPath({
     <ol className="space-y-3">
       {groups.map((group) => (
         <li
-          className="rounded-2xl border bg-card p-3.5"
+          className="rounded-none border bg-card p-3.5"
           key={`${group.stepNumber}-${group.steps[0]?.id}`}
         >
           <div className="flex items-center gap-2.5">
-            <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-muted text-xs font-bold">
+            <span className="grid size-7 shrink-0 place-items-center rounded-none bg-muted text-xs font-bold">
               {group.stepNumber}
             </span>
             <p className="text-sm font-semibold">Step {group.stepNumber}</p>
@@ -86,7 +86,7 @@ export function ApprovalPath({
             {group.steps.map((step) => (
               <li
                 className={cn(
-                  "flex flex-wrap items-center justify-between gap-2 rounded-xl border px-3 py-2",
+                  "flex flex-wrap items-center justify-between gap-2 rounded-none border px-3 py-2",
                   step.id === highlightStepId && "ring-2 ring-ring"
                 )}
                 key={step.id}
@@ -108,7 +108,7 @@ export function ApprovalPath({
                         : "Not yet assigned"}
                   </p>
                   {step.returnReason && (
-                    <p className="mt-1.5 rounded-lg bg-muted/50 px-2.5 py-1.5 text-xs leading-5">
+                    <p className="mt-1.5 rounded-none bg-muted/50 px-2.5 py-1.5 text-xs leading-5">
                       <span className="font-semibold">Reason:</span>{" "}
                       {step.returnReason}
                       {step.returnTarget === "STEP" &&
@@ -123,7 +123,7 @@ export function ApprovalPath({
                 </div>
                 <span
                   className={cn(
-                    "inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 text-[0.62rem] font-bold tracking-wide uppercase",
+                    "inline-flex shrink-0 items-center gap-1.5 rounded-none border px-2.5 py-1 text-[0.62rem] font-bold tracking-wide uppercase",
                     statusStyles[step.status]
                   )}
                 >

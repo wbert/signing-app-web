@@ -15,7 +15,7 @@ export default function SetPasswordPage() {
       <section className="relative hidden overflow-hidden bg-[#143c32] px-12 py-10 text-white lg:flex lg:flex-col">
         <BrandLockup className="relative z-10 text-white [&_span_span:last-child]:text-emerald-100/65" />
         <div className="relative z-10 my-auto max-w-md">
-          <span className="grid size-12 place-items-center rounded-2xl border border-white/10 bg-white/5">
+          <span className="grid size-12 place-items-center rounded-none border border-white/10 bg-white/5">
             <FileKey2 className="size-5 text-emerald-300" />
           </span>
           <h2 className="mt-7 font-heading text-4xl leading-tight font-semibold tracking-[-0.04em]">

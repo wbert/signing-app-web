@@ -215,7 +215,7 @@ export function WorkflowDetail({ requestId }: { requestId: string }) {
     <DocumentShell
       actions={
         <Button
-          className="rounded-xl"
+          className="rounded-none"
           disabled={working}
           onClick={() => void load()}
           variant="outline"
@@ -236,7 +236,7 @@ export function WorkflowDetail({ requestId }: { requestId: string }) {
           <NoticeBanner notice={notice} onDismiss={() => setNotice(null)} />
         )}
 
-        <section className="rounded-3xl border bg-card p-5 sm:p-7">
+        <section className="rounded-none border bg-card p-5 sm:p-7">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <WorkflowStatusBadge status={workflow.status} />
             <p className="text-xs text-muted-foreground">
@@ -274,14 +274,14 @@ export function WorkflowDetail({ requestId }: { requestId: string }) {
           </dl>
 
           {workflow.cancelReason && (
-            <p className="mt-5 rounded-2xl border bg-muted/30 px-4 py-3 text-sm leading-6">
+            <p className="mt-5 rounded-none border bg-muted/30 px-4 py-3 text-sm leading-6">
               <span className="font-semibold">Reason given: </span>
               {workflow.cancelReason}
             </p>
           )}
         </section>
 
-        <section className="rounded-3xl border bg-card p-5 sm:p-7">
+        <section className="rounded-none border bg-card p-5 sm:p-7">
           <h2 className="font-heading text-xl font-semibold tracking-tight">
             Signatories
           </h2>
@@ -309,14 +309,14 @@ export function WorkflowDetail({ requestId }: { requestId: string }) {
         </section>
 
         {workflow.approvalSteps.length > 0 && (
-          <section className="rounded-3xl border bg-card p-5 sm:p-7">
+          <section className="rounded-none border bg-card p-5 sm:p-7">
             <h2 className="font-heading text-xl font-semibold tracking-tight">
               Approval history
             </h2>
             <ol className="mt-5 space-y-2.5">
               {workflow.approvalSteps.map((step) => (
                 <li
-                  className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border px-4 py-3"
+                  className="flex flex-wrap items-center justify-between gap-3 rounded-none border px-4 py-3"
                   key={step.id}
                 >
                   <div>
@@ -343,7 +343,7 @@ export function WorkflowDetail({ requestId }: { requestId: string }) {
           </section>
         )}
 
-        <section className="rounded-3xl border bg-card p-5 sm:p-7">
+        <section className="rounded-none border bg-card p-5 sm:p-7">
           <h2 className="font-heading text-lg font-semibold tracking-tight">
             Withdraw this request
           </h2>
@@ -357,7 +357,7 @@ export function WorkflowDetail({ requestId }: { requestId: string }) {
           ) : voiding ? (
             <form className="mt-3" onSubmit={submitVoid}>
               <div
-                className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm leading-6 text-red-950 dark:border-red-950 dark:bg-red-950/35 dark:text-red-100"
+                className="rounded-none border border-red-200 bg-red-50 px-4 py-3 text-sm leading-6 text-red-950 dark:border-red-950 dark:bg-red-950/35 dark:text-red-100"
                 role="alert"
               >
                 <p className="flex items-center gap-2 font-semibold">
@@ -396,7 +396,7 @@ export function WorkflowDetail({ requestId }: { requestId: string }) {
 
               <div className="mt-4 flex flex-col gap-2 sm:flex-row">
                 <Button
-                  className="rounded-xl"
+                  className="rounded-none"
                   disabled={working || reason.trim().length === 0}
                   type="submit"
                   variant="destructive"
@@ -409,7 +409,7 @@ export function WorkflowDetail({ requestId }: { requestId: string }) {
                   Void this request
                 </Button>
                 <Button
-                  className="rounded-xl"
+                  className="rounded-none"
                   disabled={working}
                   onClick={() => {
                     setVoiding(false)
@@ -429,7 +429,7 @@ export function WorkflowDetail({ requestId }: { requestId: string }) {
                 signing link unusable.
               </p>
               <Button
-                className="mt-4 rounded-xl"
+                className="mt-4 rounded-none"
                 disabled={working}
                 onClick={() => setVoiding(true)}
                 type="button"
@@ -478,7 +478,7 @@ function AssignmentRow({
   return (
     <li
       className={cn(
-        "rounded-2xl border px-4 py-4",
+        "rounded-none border px-4 py-4",
         failed && "border-red-200 dark:border-red-950"
       )}
     >
@@ -546,7 +546,7 @@ function AssignmentRow({
 
       {failure && (
         <p
-          className="mt-3 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-xs leading-5 text-red-950 dark:border-red-950 dark:bg-red-950/35 dark:text-red-100"
+          className="mt-3 rounded-none border border-red-200 bg-red-50 px-3 py-2 text-xs leading-5 text-red-950 dark:border-red-950 dark:bg-red-950/35 dark:text-red-100"
           role="alert"
         >
           {failure}
@@ -556,7 +556,7 @@ function AssignmentRow({
       {assignment.correctiveAction === "REISSUE" && (
         <div className="mt-3">
           <Button
-            className="rounded-xl"
+            className="rounded-none"
             disabled={disabled}
             onClick={onReissue}
             size="sm"

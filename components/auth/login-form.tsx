@@ -168,7 +168,7 @@ export function LoginForm() {
   return (
     <div className="w-full max-w-[29rem]">
       <div className="mb-9">
-        <div className="mb-5 flex size-12 items-center justify-center rounded-2xl border border-emerald-900/10 bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+        <div className="mb-5 flex size-12 items-center justify-center rounded-none border border-emerald-900/10 bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
           {step === "credentials" ? (
             <LockKeyhole aria-hidden="true" className="size-5" />
           ) : (
@@ -200,7 +200,7 @@ export function LoginForm() {
 
       {message && (
         <div
-          className="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-900 dark:border-red-950 dark:bg-red-950/40 dark:text-red-200"
+          className="mb-5 rounded-none border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-900 dark:border-red-950 dark:bg-red-950/40 dark:text-red-200"
           role="alert"
         >
           <p>{message}</p>
@@ -277,7 +277,7 @@ export function LoginForm() {
       )}
 
       {step === "enroll-verify" && totpUri && (
-        <div className="mb-5 rounded-2xl border bg-muted/35 p-4">
+        <div className="mb-5 rounded-none border bg-muted/35 p-4">
           <div className="text-center">
             <p className="text-sm font-semibold">
               Scan with your authenticator
@@ -286,7 +286,7 @@ export function LoginForm() {
               Works with Google Authenticator, Microsoft Authenticator,
               1Password, and other TOTP apps.
             </p>
-            <div className="mx-auto mt-4 w-fit rounded-2xl border bg-white p-3 shadow-sm">
+            <div className="mx-auto mt-4 w-fit rounded-none border bg-white p-3 shadow-sm">
               <QRCodeSVG
                 level="M"
                 size={184}
@@ -297,7 +297,7 @@ export function LoginForm() {
           </div>
 
           {totpSetupKey && (
-            <div className="mt-4 rounded-xl border bg-background/80 p-3">
+            <div className="mt-4 rounded-none border bg-background/80 p-3">
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <KeyRound className="size-4 shrink-0 text-emerald-700" />
@@ -339,7 +339,7 @@ export function LoginForm() {
       )}
 
       {step === "enroll-verify" && backupCodes.length > 0 && (
-        <div className="mb-5 rounded-2xl border border-amber-300/70 bg-amber-50 p-4 dark:border-amber-900 dark:bg-amber-950/30">
+        <div className="mb-5 rounded-none border border-amber-300/70 bg-amber-50 p-4 dark:border-amber-900 dark:bg-amber-950/30">
           <div className="flex items-center justify-between gap-3">
             <p className="text-sm font-semibold text-amber-950 dark:text-amber-100">
               Save your recovery codes now
@@ -433,7 +433,7 @@ function Field({
 function SubmitButton({ busy, label }: { busy: boolean; label: string }) {
   return (
     <Button
-      className="w-full rounded-xl"
+      className="w-full rounded-none"
       disabled={busy}
       size="lg"
       type="submit"

@@ -7,7 +7,6 @@ import {
   Clock3,
   FileText,
   Files,
-  LoaderCircle,
   Plus,
   RefreshCw,
   Search,
@@ -21,6 +20,7 @@ import {
   NoticeBanner,
   type Notice,
 } from "@/components/admin/admin-ui"
+import { Skeleton } from "@/components/ui/skeleton"
 import { DocumentShell } from "@/components/documents/document-shell"
 import { Button } from "@/components/ui/button"
 import {
@@ -215,7 +215,7 @@ export function DocumentList() {
       actions={
         canCreate ? (
           <Button
-            className="rounded-xl"
+            className="rounded-none"
             render={<Link href="/documents/new" />}
             size="lg"
           >
@@ -256,7 +256,7 @@ export function DocumentList() {
         )}
       </div>
 
-      <section className="mt-6 overflow-hidden rounded-3xl border bg-card shadow-sm">
+      <section className="mt-6 overflow-hidden rounded-none border bg-card shadow-sm">
         <div className="flex flex-col gap-4 border-b p-4 sm:p-5 lg:flex-row lg:items-center lg:justify-between">
           <div className="relative w-full max-w-md">
             <Search className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-muted-foreground" />
@@ -292,7 +292,7 @@ export function DocumentList() {
             </p>
             <Button
               aria-label="Refresh documents"
-              className="rounded-xl"
+              className="rounded-none"
               disabled={refreshing}
               onClick={() => void load(false)}
               size="icon-sm"
@@ -319,12 +319,14 @@ export function DocumentList() {
         {hasMore && (
           <div className="flex justify-center border-t p-4">
             <Button
-              className="rounded-xl"
+              className="rounded-none"
               disabled={loadingMore}
               onClick={() => void loadMore()}
               variant="outline"
             >
-              {loadingMore && <LoaderCircle className="animate-spin" />}
+              {loadingMore && (
+                <Skeleton className="h-3 w-8" aria-hidden="true" />
+              )}
               {loadingMore ? "Loading…" : "Load more"}
             </Button>
           </div>
@@ -379,7 +381,7 @@ function StatusPill({ status }: { status: DocumentApprovalStatus }) {
   return (
     <span
       className={cn(
-        "rounded-full border px-2.5 py-1 text-[0.62rem] font-bold tracking-wide uppercase",
+        "rounded-none border px-2.5 py-1 text-[0.62rem] font-bold tracking-wide uppercase",
         statusStyles[status]
       )}
     >
@@ -410,7 +412,7 @@ function EmptyState({
       </p>
       {!filtered && canCreate && (
         <Button
-          className="mt-5 rounded-xl"
+          className="mt-5 rounded-none"
           render={<Link href="/documents/new" />}
         >
           <Plus />
@@ -431,7 +433,7 @@ function SummaryCard({
   value: number
 }) {
   return (
-    <div className="rounded-2xl border bg-card p-4 shadow-sm">
+    <div className="rounded-none border bg-card p-4 shadow-sm">
       <div className="flex items-center gap-2 text-muted-foreground">
         {icon}
         <p className="text-[0.68rem] font-bold tracking-[0.1em] uppercase">

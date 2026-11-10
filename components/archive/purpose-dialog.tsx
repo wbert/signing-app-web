@@ -76,7 +76,7 @@ export function PurposeDialog({
 
         <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-end">
           <Button
-            className="rounded-xl"
+            className="rounded-none"
             disabled={busy}
             onClick={onClose}
             type="button"
@@ -84,7 +84,7 @@ export function PurposeDialog({
           >
             Cancel
           </Button>
-          <Button className="rounded-xl" disabled={busy} type="submit">
+          <Button className="rounded-none" disabled={busy} type="submit">
             {busy && <LoaderCircle className="animate-spin" />}
             {confirmLabel}
           </Button>

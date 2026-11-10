@@ -207,7 +207,7 @@ export function PageSurface({
     <div className="w-full" ref={container}>
       <div
         className={cn(
-          "relative mx-auto overflow-hidden rounded-lg border-2 bg-white shadow-sm dark:bg-neutral-100",
+          "relative mx-auto overflow-hidden rounded-none border-2 bg-white shadow-sm dark:bg-neutral-100",
           armed && !readOnly
             ? "cursor-crosshair border-emerald-600"
             : "border-border"

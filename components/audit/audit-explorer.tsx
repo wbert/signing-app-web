@@ -183,7 +183,7 @@ export function AuditExplorer() {
       title="Activity records"
     >
       <div className="mt-8 space-y-5">
-        <p className="flex items-center gap-2 rounded-2xl border bg-muted/25 px-4 py-3 text-xs text-muted-foreground">
+        <p className="flex items-center gap-2 rounded-none border bg-muted/25 px-4 py-3 text-xs text-muted-foreground">
           <Lock className="size-3.5 shrink-0" />
           This view is read-only. Records cannot be amended or deleted.
         </p>
@@ -193,7 +193,7 @@ export function AuditExplorer() {
         )}
 
         <form
-          className="rounded-3xl border bg-card p-5 sm:p-6"
+          className="rounded-none border bg-card p-5 sm:p-6"
           onSubmit={(event) => {
             event.preventDefault()
             void search({ filters, offset: 0, foreground: false })
@@ -289,12 +289,12 @@ export function AuditExplorer() {
           </div>
 
           <div className="mt-5 flex flex-wrap gap-2">
-            <Button className="rounded-xl" disabled={searching} type="submit">
+            <Button className="rounded-none" disabled={searching} type="submit">
               <Search />
               Search
             </Button>
             <Button
-              className="rounded-xl"
+              className="rounded-none"
               disabled={searching}
               onClick={() => {
                 setFilters({})
@@ -315,7 +315,7 @@ export function AuditExplorer() {
         </p>
 
         {events.length === 0 ? (
-          <div className="rounded-3xl border bg-card p-10 text-center">
+          <div className="rounded-none border bg-card p-10 text-center">
             <ScrollText className="mx-auto size-7 text-muted-foreground" />
             <h2 className="mt-4 font-heading text-xl font-semibold">
               No events match
@@ -341,7 +341,7 @@ export function AuditExplorer() {
 
         <div className="flex items-center justify-between gap-3">
           <Button
-            className="rounded-xl"
+            className="rounded-none"
             disabled={pagination.offset === 0 || searching}
             onClick={() =>
               void search({
@@ -356,7 +356,7 @@ export function AuditExplorer() {
             Previous
           </Button>
           <Button
-            className="rounded-xl"
+            className="rounded-none"
             disabled={
               pagination.offset + PAGE_SIZE >= pagination.total || searching
             }
@@ -390,7 +390,7 @@ function EventRow({
   const data = orderedData(event)
 
   return (
-    <li className="rounded-2xl border bg-card">
+    <li className="rounded-none border bg-card">
       <button
         aria-expanded={expanded}
         className="flex w-full items-start justify-between gap-4 px-5 py-4 text-left focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"

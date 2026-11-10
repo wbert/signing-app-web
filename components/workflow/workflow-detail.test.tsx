@@ -18,7 +18,10 @@ const { apiRequestMock, routerMock } = vi.hoisted(() => ({
   routerMock: { refresh: vi.fn(), replace: vi.fn() },
 }))
 
-vi.mock("next/navigation", () => ({ useRouter: () => routerMock }))
+vi.mock("next/navigation", () => ({
+  usePathname: () => "/dashboard",
+  useRouter: () => routerMock,
+}))
 
 vi.mock("@/lib/api/client", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@/lib/api/client")>()

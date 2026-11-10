@@ -12,6 +12,7 @@ const { apiRequestMock, routerMock } = vi.hoisted(() => ({
 }))
 
 vi.mock("next/navigation", () => ({
+  usePathname: () => "/dashboard",
   useRouter: () => routerMock,
 }))
 

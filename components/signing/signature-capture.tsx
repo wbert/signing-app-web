@@ -130,7 +130,7 @@ export function SignatureCapture({
         {methods.map((entry) => (
           <label
             className={cn(
-              "cursor-pointer rounded-xl border px-3 py-2.5 transition has-focus-visible:ring-2 has-focus-visible:ring-ring/30",
+              "cursor-pointer rounded-none border px-3 py-2.5 transition has-focus-visible:ring-2 has-focus-visible:ring-ring/30",
               method === entry.method
                 ? "border-emerald-700 bg-emerald-50 dark:bg-emerald-950/40"
                 : "bg-card hover:bg-muted"
@@ -212,7 +212,7 @@ export function SignatureCapture({
             <input
               accept="image/png,image/jpeg"
               aria-describedby="signature-image-description"
-              className="field-input h-auto py-2.5 file:mr-3 file:rounded-lg file:border-0 file:bg-muted file:px-3 file:py-1.5 file:text-xs file:font-semibold"
+              className="field-input h-auto py-2.5 file:mr-3 file:rounded-none file:border-0 file:bg-muted file:px-3 file:py-1.5 file:text-xs file:font-semibold"
               disabled={disabled}
               id="signature-image"
               onChange={(event) => void handleFile(event.target.files?.[0])}
@@ -238,7 +238,7 @@ export function SignatureCapture({
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 alt="The signature image you selected"
-                className="mt-3 max-h-32 rounded-xl border bg-white p-2"
+                className="mt-3 max-h-32 rounded-none border bg-white p-2"
                 src={uploaded}
               />
             )}
@@ -326,7 +326,7 @@ function DrawingPad({
     <div>
       <canvas
         aria-label="Signature drawing area"
-        className="h-44 w-full touch-none rounded-xl border bg-white dark:bg-neutral-100"
+        className="h-44 w-full touch-none rounded-none border bg-white dark:bg-neutral-100"
         onPointerCancel={finish}
         onPointerDown={start}
         onPointerLeave={finish}
@@ -341,7 +341,7 @@ function DrawingPad({
           instead — it is accepted in exactly the same way.
         </p>
         <Button
-          className="shrink-0 rounded-xl"
+          className="shrink-0 rounded-none"
           disabled={disabled || !hasInk}
           onClick={clear}
           size="sm"

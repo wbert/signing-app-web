@@ -238,7 +238,7 @@ export function ApprovalMatrixDialog({
 
       <section
         aria-labelledby="current-matrix-heading"
-        className="mt-5 rounded-2xl border bg-muted/25 p-4"
+        className="mt-5 rounded-none border bg-muted/25 p-4"
       >
         <h3 className="text-sm font-semibold" id="current-matrix-heading">
           Current matrix
@@ -260,7 +260,7 @@ export function ApprovalMatrixDialog({
         )}
       </section>
 
-      <div className="mt-4 flex gap-2.5 rounded-2xl border border-amber-300/70 bg-amber-50 p-3.5 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
+      <div className="mt-4 flex gap-2.5 rounded-none border border-amber-300/70 bg-amber-50 p-3.5 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100">
         <CircleAlert className="mt-0.5 size-4 shrink-0" />
         <p>
           Publishing creates a new version that applies only to documents
@@ -272,7 +272,7 @@ export function ApprovalMatrixDialog({
 
       {problems.length > 0 && (
         <div
-          className="mt-4 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-950 dark:border-red-950 dark:bg-red-950/35 dark:text-red-100"
+          className="mt-4 rounded-none border border-red-200 bg-red-50 p-4 text-sm text-red-950 dark:border-red-950 dark:bg-red-950/35 dark:text-red-100"
           role="alert"
         >
           <p className="font-semibold">This matrix cannot be published yet:</p>
@@ -290,12 +290,12 @@ export function ApprovalMatrixDialog({
             const parallel = group.approvers.length > 1
             return (
               <li
-                className="rounded-2xl border bg-card p-4 shadow-xs"
+                className="rounded-none border bg-card p-4 shadow-xs"
                 key={group.id}
               >
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-emerald-50 text-sm font-bold text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+                    <span className="grid size-9 shrink-0 place-items-center rounded-none bg-emerald-50 text-sm font-bold text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
                       {index + 1}
                     </span>
                     <div>
@@ -318,7 +318,7 @@ export function ApprovalMatrixDialog({
                   <div className="flex gap-1.5">
                     <Button
                       aria-label={`Move step ${index + 1} earlier`}
-                      className="rounded-xl"
+                      className="rounded-none"
                       disabled={index === 0}
                       onClick={() => moveStep(index, -1)}
                       size="icon-sm"
@@ -329,7 +329,7 @@ export function ApprovalMatrixDialog({
                     </Button>
                     <Button
                       aria-label={`Move step ${index + 1} later`}
-                      className="rounded-xl"
+                      className="rounded-none"
                       disabled={index === groups.length - 1}
                       onClick={() => moveStep(index, 1)}
                       size="icon-sm"
@@ -340,7 +340,7 @@ export function ApprovalMatrixDialog({
                     </Button>
                     <Button
                       aria-label={`Remove step ${index + 1}`}
-                      className="rounded-xl"
+                      className="rounded-none"
                       disabled={groups.length === 1}
                       onClick={() => removeStep(index)}
                       size="icon-sm"
@@ -361,7 +361,7 @@ export function ApprovalMatrixDialog({
                       ).length > 1
                     return (
                       <li
-                        className="flex flex-col gap-3 rounded-xl border bg-background p-3 sm:flex-row sm:items-center"
+                        className="flex flex-col gap-3 rounded-none border bg-background p-3 sm:flex-row sm:items-center"
                         key={approver.id}
                       >
                         <div className="min-w-0 flex-1">
@@ -407,7 +407,7 @@ export function ApprovalMatrixDialog({
                         </label>
                         <Button
                           aria-label={`Remove approver ${approverIndex + 1} from step ${index + 1}`}
-                          className="rounded-xl sm:mt-5"
+                          className="rounded-none sm:mt-5"
                           onClick={() => removeApprover(index, approver.id)}
                           size="icon-sm"
                           type="button"
@@ -421,7 +421,7 @@ export function ApprovalMatrixDialog({
                 </ul>
 
                 <Button
-                  className="mt-3 rounded-xl"
+                  className="mt-3 rounded-none"
                   disabled={group.approvers.length >= roles.length}
                   onClick={() => addApprover(index)}
                   size="sm"
@@ -437,7 +437,7 @@ export function ApprovalMatrixDialog({
         </ol>
 
         <Button
-          className="mt-3 rounded-xl"
+          className="mt-3 rounded-none"
           disabled={steps.length >= documentTypeLimits.steps.max}
           onClick={addStep}
           size="sm"
@@ -450,7 +450,7 @@ export function ApprovalMatrixDialog({
 
         {plannedMissingRoles.length > 0 && (
           <div
-            className="mt-5 flex gap-2.5 rounded-2xl border border-amber-300/70 bg-amber-50 p-3.5 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100"
+            className="mt-5 flex gap-2.5 rounded-none border border-amber-300/70 bg-amber-50 p-3.5 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/35 dark:text-amber-100"
             role="status"
           >
             <CircleAlert className="mt-0.5 size-4 shrink-0" />
@@ -471,7 +471,7 @@ export function ApprovalMatrixDialog({
           </p>
           <div className="flex flex-col-reverse gap-2 sm:flex-row">
             <Button
-              className="rounded-xl"
+              className="rounded-none"
               disabled={busy}
               onClick={onClose}
               type="button"
@@ -479,7 +479,7 @@ export function ApprovalMatrixDialog({
             >
               Cancel
             </Button>
-            <Button className="rounded-xl" disabled={busy} type="submit">
+            <Button className="rounded-none" disabled={busy} type="submit">
               {busy ? <LoaderCircle className="animate-spin" /> : <Plus />}
               {busy
                 ? "Publishing…"

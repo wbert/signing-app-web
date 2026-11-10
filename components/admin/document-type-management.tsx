@@ -5,7 +5,6 @@ import {
   ArrowLeft,
   CircleAlert,
   CircleCheck,
-  CircleUserRound,
   Clock,
   EyeOff,
   FileStack,
@@ -13,7 +12,6 @@ import {
   GitBranch,
   Layers,
   LoaderCircle,
-  LogOut,
   Lock,
   Plus,
   RefreshCw,
@@ -35,7 +33,6 @@ import {
 import { ApprovalMatrixDialog } from "@/components/admin/approval-matrix-dialog"
 import { DocumentTypeFormDialog } from "@/components/admin/document-type-form-dialog"
 import { TemplateUploadDialog } from "@/components/admin/template-upload-dialog"
-import { BrandLockup } from "@/components/brand/brand-lockup"
 import { Button } from "@/components/ui/button"
 import {
   ApiError,
@@ -90,7 +87,6 @@ export function DocumentTypeManagement() {
   >([])
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
-  const [signingOut, setSigningOut] = useState(false)
   const [reactivating, setReactivating] = useState<string | null>(null)
   const [query, setQuery] = useState("")
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("ALL")
@@ -294,16 +290,6 @@ export function DocumentTypeManagement() {
     }
   }
 
-  async function signOut() {
-    setSigningOut(true)
-    try {
-      await apiRequest("/api/auth/sign-out", { method: "POST", body: {} })
-    } finally {
-      router.replace("/login")
-      router.refresh()
-    }
-  }
-
   if (loading) {
     return <FullPageStatus message="Loading document configuration…" />
   }
@@ -329,48 +315,7 @@ export function DocumentTypeManagement() {
   ).length
 
   return (
-    <div className="min-h-svh bg-[#f5f7f3] dark:bg-background">
-      <header className="border-b bg-background/95 backdrop-blur">
-        <div className="mx-auto flex h-20 max-w-[90rem] items-center justify-between px-5 sm:px-8">
-          <div className="flex items-center gap-5">
-            <BrandLockup />
-            <span className="hidden h-7 w-px bg-border md:block" />
-            <Link
-              className="hidden items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-foreground md:flex"
-              href="/dashboard"
-            >
-              <ArrowLeft className="size-3.5" />
-              Workspace
-            </Link>
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="hidden text-right sm:block">
-              <p className="text-sm font-semibold">{session.user.fullName}</p>
-              <p className="text-xs text-muted-foreground">
-                @{session.user.username}
-              </p>
-            </div>
-            <div className="grid size-10 place-items-center rounded-full border bg-card text-muted-foreground">
-              <CircleUserRound className="size-5" />
-            </div>
-            <Button
-              aria-label="Sign out"
-              className="rounded-xl"
-              disabled={signingOut}
-              onClick={signOut}
-              size="icon"
-              variant="ghost"
-            >
-              {signingOut ? (
-                <LoaderCircle className="animate-spin" />
-              ) : (
-                <LogOut />
-              )}
-            </Button>
-          </div>
-        </div>
-      </header>
-
+    <>
       <main className="mx-auto max-w-[90rem] px-5 py-8 sm:px-8 sm:py-10">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -395,7 +340,7 @@ export function DocumentTypeManagement() {
           </div>
           {canManage && (
             <Button
-              className="rounded-xl"
+              className="rounded-none"
               onClick={() => setDialog({ kind: "create" })}
               size="lg"
             >
@@ -444,7 +389,7 @@ export function DocumentTypeManagement() {
           )}
         </div>
 
-        <section className="mt-6 rounded-3xl border bg-card shadow-sm">
+        <section className="mt-6 rounded-none border bg-card shadow-sm">
           <div className="flex flex-col gap-4 border-b p-4 sm:p-5 lg:flex-row lg:items-center lg:justify-between">
             <div className="relative w-full max-w-md">
               <Search className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-muted-foreground" />
@@ -463,7 +408,7 @@ export function DocumentTypeManagement() {
                 {statusFilters.map((filter) => (
                   <label
                     className={cn(
-                      "cursor-pointer rounded-xl border px-3 py-1.5 text-xs font-semibold transition focus-within:ring-2 focus-within:ring-ring/30",
+                      "cursor-pointer rounded-none border px-3 py-1.5 text-xs font-semibold transition focus-within:ring-2 focus-within:ring-ring/30",
                       statusFilter === filter.value
                         ? "border-emerald-700/35 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/45 dark:text-emerald-200"
                         : "text-muted-foreground hover:bg-muted"
@@ -488,7 +433,7 @@ export function DocumentTypeManagement() {
                 </p>
                 <Button
                   aria-label="Refresh document types"
-                  className="rounded-xl"
+                  className="rounded-none"
                   disabled={refreshing}
                   onClick={() => void load({ foreground: false })}
                   size="icon-sm"
@@ -596,7 +541,7 @@ export function DocumentTypeManagement() {
           }}
         />
       )}
-    </div>
+    </>
   )
 }
 
@@ -627,14 +572,14 @@ function DocumentTypeCard({
           <h2 className="font-heading text-lg font-semibold tracking-tight">
             {documentType.name}
           </h2>
-          <span className="rounded-full border bg-muted/40 px-2.5 py-1 font-mono text-[0.62rem] font-bold tracking-wide">
+          <span className="rounded-none border bg-muted/40 px-2.5 py-1 font-mono text-[0.62rem] font-bold tracking-wide">
             {documentType.code}
           </span>
           <span className="text-xs text-muted-foreground">
             {documentType.category}
           </span>
           {!documentType.isActive && (
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-red-200 bg-red-50 px-2.5 py-1 text-[0.62rem] font-bold tracking-wide text-red-800 uppercase dark:border-red-950 dark:bg-red-950/40 dark:text-red-300">
+            <span className="inline-flex items-center gap-1.5 rounded-none border border-red-200 bg-red-50 px-2.5 py-1 text-[0.62rem] font-bold tracking-wide text-red-800 uppercase dark:border-red-950 dark:bg-red-950/40 dark:text-red-300">
               <EyeOff className="size-3" />
               Inactive
             </span>
@@ -776,7 +721,7 @@ function DocumentTypeCard({
             <ul className="mt-1.5 flex flex-wrap gap-1.5">
               {documentType.requiredAttachmentKeys.map((key) => (
                 <li
-                  className="rounded-full border bg-muted/40 px-2.5 py-1 font-mono text-[0.62rem] font-bold tracking-wide"
+                  className="rounded-none border bg-muted/40 px-2.5 py-1 font-mono text-[0.62rem] font-bold tracking-wide"
                   key={key}
                 >
                   {key}
@@ -790,7 +735,7 @@ function DocumentTypeCard({
       {canManage && (
         <div className="flex shrink-0 flex-wrap gap-2 lg:w-52 lg:flex-col">
           <Button
-            className="rounded-xl lg:w-full lg:justify-start"
+            className="rounded-none lg:w-full lg:justify-start"
             onClick={onConfigure}
             size="sm"
             variant="outline"
@@ -799,7 +744,7 @@ function DocumentTypeCard({
             Configuration
           </Button>
           <Button
-            className="rounded-xl lg:w-full lg:justify-start"
+            className="rounded-none lg:w-full lg:justify-start"
             onClick={onTemplate}
             size="sm"
             variant="outline"
@@ -808,7 +753,7 @@ function DocumentTypeCard({
             PDF template
           </Button>
           <Button
-            className="rounded-xl lg:w-full lg:justify-start"
+            className="rounded-none lg:w-full lg:justify-start"
             onClick={onMatrix}
             size="sm"
             variant="outline"
@@ -818,7 +763,7 @@ function DocumentTypeCard({
           </Button>
           {!documentType.isActive && (
             <Button
-              className="rounded-xl lg:w-full lg:justify-start"
+              className="rounded-none lg:w-full lg:justify-start"
               disabled={reactivating}
               onClick={onReactivate}
               size="sm"
@@ -862,7 +807,7 @@ function UsabilityPill({ label, usable }: { label: string; usable: boolean }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[0.64rem] font-bold tracking-wide uppercase",
+        "inline-flex items-center gap-1.5 rounded-none border px-2.5 py-1 text-[0.64rem] font-bold tracking-wide uppercase",
         usable
           ? "border-emerald-200 bg-emerald-50 text-emerald-800 dark:border-emerald-950 dark:bg-emerald-950/40 dark:text-emerald-300"
           : "border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-950 dark:bg-amber-950/40 dark:text-amber-300"
@@ -890,7 +835,7 @@ function VersionPanel({
   title: string
 }) {
   return (
-    <section className="rounded-2xl border bg-muted/25 p-3.5 text-xs leading-5">
+    <section className="rounded-none border bg-muted/25 p-3.5 text-xs leading-5">
       <h3 className="flex items-center gap-1.5 text-[0.68rem] font-bold tracking-[0.1em] text-muted-foreground uppercase">
         {icon}
         {title}
@@ -932,8 +877,8 @@ function SummaryCard({
   value: number
 }) {
   return (
-    <div className="flex items-center gap-3 rounded-2xl border bg-card px-4 py-4 shadow-xs">
-      <span className="grid size-9 place-items-center rounded-xl bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+    <div className="flex items-center gap-3 rounded-none border bg-card px-4 py-4 shadow-xs">
+      <span className="grid size-9 place-items-center rounded-none bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
         {icon}
       </span>
       <div>
@@ -956,7 +901,7 @@ function EmptyState({
   return (
     <div className="grid min-h-72 place-items-center p-8 text-center">
       <div>
-        <span className="mx-auto grid size-12 place-items-center rounded-2xl bg-muted text-muted-foreground">
+        <span className="mx-auto grid size-12 place-items-center rounded-none bg-muted text-muted-foreground">
           <Layers className="size-5" />
         </span>
         <h2 className="mt-4 font-heading text-xl font-semibold">
@@ -968,7 +913,7 @@ function EmptyState({
             : "Create a document type, publish its PDF template, and publish an approval matrix before Senders can prepare documents."}
         </p>
         {!filtered && canManage && (
-          <Button className="mt-5 rounded-xl" onClick={onCreate}>
+          <Button className="mt-5 rounded-none" onClick={onCreate}>
             <Plus />
             New document type
           </Button>

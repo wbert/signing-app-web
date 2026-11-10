@@ -257,7 +257,7 @@ export function ArchiveSearch() {
       actions={
         can(session.capabilities, "archives:export") ? (
           <Button
-            className="rounded-xl"
+            className="rounded-none"
             onClick={() => setExporting(true)}
             variant="outline"
           >
@@ -292,7 +292,7 @@ export function ArchiveSearch() {
         </p>
 
         {records.length === 0 ? (
-          <div className="rounded-3xl border bg-card p-10 text-center">
+          <div className="rounded-none border bg-card p-10 text-center">
             <Archive className="mx-auto size-7 text-muted-foreground" />
             <h2 className="mt-4 font-heading text-xl font-semibold">
               Nothing to show
@@ -305,7 +305,7 @@ export function ArchiveSearch() {
         ) : (
           <ul className="space-y-3">
             {records.map((record) => (
-              <li className="rounded-3xl border bg-card p-5" key={record.id}>
+              <li className="rounded-none border bg-card p-5" key={record.id}>
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="min-w-0">
                     <h2 className="truncate font-heading text-lg font-semibold tracking-tight">
@@ -333,7 +333,7 @@ export function ArchiveSearch() {
 
                 <div className="mt-4 flex flex-wrap gap-2">
                   <Button
-                    className="rounded-xl"
+                    className="rounded-none"
                     onClick={() => setPending({ kind: "view", record })}
                     size="sm"
                     variant="outline"
@@ -359,7 +359,7 @@ export function ArchiveSearch() {
 
         <div className="flex items-center justify-between gap-3">
           <Button
-            className="rounded-xl"
+            className="rounded-none"
             disabled={pagination.offset === 0 || searching}
             onClick={() =>
               void search({
@@ -374,7 +374,7 @@ export function ArchiveSearch() {
             Previous
           </Button>
           <Button
-            className="rounded-xl"
+            className="rounded-none"
             disabled={
               pagination.offset + PAGE_SIZE >= pagination.total || searching
             }
@@ -448,7 +448,7 @@ function RetentionBadge({ record }: { record: ArchiveRecord }) {
   return (
     <span
       className={cn(
-        "inline-flex shrink-0 items-center rounded-full border px-2.5 py-1 text-[0.68rem] font-semibold",
+        "inline-flex shrink-0 items-center rounded-none border px-2.5 py-1 text-[0.68rem] font-semibold",
         due
           ? "border-amber-300/70 bg-amber-50 text-amber-950 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-100"
           : "border-border bg-muted text-muted-foreground"
@@ -475,7 +475,7 @@ function OpenedRecord({
   const result = verified ? authenticityResult(verification) : null
 
   return (
-    <div className="mt-5 rounded-2xl border bg-muted/20 p-5">
+    <div className="mt-5 rounded-none border bg-muted/20 p-5">
       <dl className="grid gap-4 sm:grid-cols-2">
         <Detail label="File name" value={record.fileName} />
         <Detail label="Certificate" value={record.certificateNo} />
@@ -511,12 +511,12 @@ function OpenedRecord({
       )}
 
       <div className="mt-5 flex flex-wrap gap-2">
-        <Button className="rounded-xl" onClick={onRetrieve} size="sm">
+        <Button className="rounded-none" onClick={onRetrieve} size="sm">
           <Download />
           Retrieve documents
         </Button>
         <Button
-          className="rounded-xl"
+          className="rounded-none"
           onClick={onVerify}
           size="sm"
           variant="outline"
@@ -529,7 +529,7 @@ function OpenedRecord({
       {result && (
         <div
           className={cn(
-            "mt-4 rounded-2xl border px-4 py-3",
+            "mt-4 rounded-none border px-4 py-3",
             result === "verified"
               ? "border-emerald-200 bg-emerald-50 text-emerald-950 dark:border-emerald-950 dark:bg-emerald-950/35 dark:text-emerald-100"
               : result === "mismatch"
@@ -581,7 +581,7 @@ function FilterPanel({
 }) {
   return (
     <form
-      className="rounded-3xl border bg-card p-5 sm:p-6"
+      className="rounded-none border bg-card p-5 sm:p-6"
       onSubmit={(event) => {
         event.preventDefault()
         onSearch()
@@ -679,12 +679,12 @@ function FilterPanel({
       </div>
 
       <div className="mt-5 flex flex-wrap gap-2">
-        <Button className="rounded-xl" disabled={busy} type="submit">
+        <Button className="rounded-none" disabled={busy} type="submit">
           <FileSearch />
           Search
         </Button>
         <Button
-          className="rounded-xl"
+          className="rounded-none"
           disabled={busy}
           onClick={() => {
             onChange({})
