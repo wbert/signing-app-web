@@ -6,6 +6,7 @@ import {
   ArrowLeft,
   FileCheck2,
   Files,
+  KeyRound,
   LayoutDashboard,
   ListChecks,
   LoaderCircle,
@@ -38,6 +39,7 @@ const icons = {
   "/audit": ShieldCheck,
   "/admin/users": UsersRound,
   "/admin/document-types": Settings2,
+  "/account/security": KeyRound,
 }
 
 export function AppShell({
@@ -58,6 +60,9 @@ export function AppShell({
   const destinations = [
     { href: "/dashboard", label: "Overview" },
     ...destinationsFor(session?.capabilities ?? []),
+    ...(session
+      ? [{ href: "/account/security", label: "Account security" }]
+      : []),
   ]
   const current = destinations.find(
     (item) => pathname === item.href || pathname?.startsWith(`${item.href}/`)

@@ -666,3 +666,8 @@ export type AuditEventsResponse = {
 export type AuditEventResponse = {
   event: AuditEvent
 }
+
+export type GenerateBackupCodesResponse = {
+  status: boolean
+  backupCodes: string[]
+}

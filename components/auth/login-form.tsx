@@ -37,6 +37,7 @@ export function LoginForm() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [code, setCode] = useState("")
+  const [useBackupCode, setUseBackupCode] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [busy, setBusy] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
@@ -88,10 +89,16 @@ export function LoginForm() {
   async function handleChallenge(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     await run(async () => {
-      await apiRequest("/api/auth/two-factor/verify-totp", {
-        method: "POST",
-        body: { code, trustDevice: false },
-      })
+      const backup = step === "challenge" && useBackupCode
+      await apiRequest(
+        backup
+          ? "/api/auth/two-factor/verify-backup-code"
+          : "/api/auth/two-factor/verify-totp",
+        {
+          method: "POST",
+          body: { code: backup ? code.trim() : code, trustDevice: false },
+        }
+      )
       setCode("")
       await finishAuthentication()
     })
@@ -163,6 +170,7 @@ export function LoginForm() {
   }
 
   const isTotp = step === "challenge" || step === "enroll-verify"
+  const backupMode = step === "challenge" && useBackupCode
   const totpSetupKey = getTotpSetupKey(totpUri)
 
   return (
@@ -190,7 +198,9 @@ export function LoginForm() {
           {step === "credentials" &&
             "Use the username issued by your administrator. All staff accounts require multi-factor authentication."}
           {step === "challenge" &&
-            "Open your authenticator app and enter the current six-digit code."}
+            (useBackupCode
+              ? "Enter one of the backup codes you saved when you set up two-step verification. Each code works once."
+              : "Open your authenticator app and enter the current six-digit code.")}
           {step === "enroll" &&
             "Your account needs an authenticator before you can access documents. Confirm your password to begin."}
           {step === "enroll-verify" &&
@@ -367,22 +377,41 @@ export function LoginForm() {
 
       {isTotp && (
         <form className="space-y-5" onSubmit={handleChallenge}>
-          <Field label="Six-digit code" htmlFor="totp-code">
-            <input
-              autoComplete="one-time-code"
-              autoFocus
-              className="field-input text-center font-mono text-xl tracking-[0.45em]"
-              id="totp-code"
-              inputMode="numeric"
-              maxLength={6}
-              onChange={(event) =>
-                setCode(event.target.value.replace(/\D/gu, ""))
-              }
-              pattern="[0-9]{6}"
-              placeholder="000000"
-              required
-              value={code}
-            />
+          <Field
+            label={backupMode ? "Backup code" : "Six-digit code"}
+            htmlFor="totp-code"
+          >
+            {backupMode ? (
+              <input
+                autoComplete="off"
+                autoFocus
+                className="field-input text-center font-mono text-lg tracking-[0.15em]"
+                id="totp-code"
+                key="backup"
+                onChange={(event) => setCode(event.target.value)}
+                placeholder="xxxxx-xxxxx"
+                required
+                spellCheck={false}
+                value={code}
+              />
+            ) : (
+              <input
+                autoComplete="one-time-code"
+                autoFocus
+                className="field-input text-center font-mono text-xl tracking-[0.45em]"
+                id="totp-code"
+                inputMode="numeric"
+                key="totp"
+                maxLength={6}
+                onChange={(event) =>
+                  setCode(event.target.value.replace(/\D/gu, ""))
+                }
+                pattern="[0-9]{6}"
+                placeholder="000000"
+                required
+                value={code}
+              />
+            )}
           </Field>
           <SubmitButton
             busy={busy}
@@ -395,9 +424,26 @@ export function LoginForm() {
 
       {step === "challenge" && (
         <button
+          className="mt-5 block text-xs font-semibold text-emerald-700 hover:underline dark:text-emerald-400"
+          onClick={() => {
+            setUseBackupCode((value) => !value)
+            setCode("")
+            setMessage(null)
+          }}
+          type="button"
+        >
+          {useBackupCode
+            ? "Use authenticator app instead"
+            : "Can't access your authenticator? Use a backup code"}
+        </button>
+      )}
+
+      {step === "challenge" && (
+        <button
           className="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-foreground"
           onClick={() => {
             setStep("credentials")
+            setUseBackupCode(false)
             setCode("")
             setMessage(null)
           }}
